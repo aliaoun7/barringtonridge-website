@@ -9,13 +9,32 @@ document.addEventListener('DOMContentLoaded', function () {
   if (eligibilityForm) {
     eligibilityForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      // Here you would normally send the form data via AJAX to a server.
-      // Since this is a static site, we'll simply display a success message.
-      successMessage.hidden = false;
-      // Optional: clear form values
-      eligibilityForm.reset();
-      // Scroll to success message
-      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Gather form data and submit to the Formspree endpoint specified in the form's action attribute.
+      const formData = new FormData(eligibilityForm);
+      fetch(eligibilityForm.action, {
+        method: eligibilityForm.method,
+        body: formData,
+        headers: {
+          // Accept JSON response so we can detect success or error states
+          'Accept': 'application/json',
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Show success message and reset form on successful submission
+            successMessage.hidden = false;
+            eligibilityForm.reset();
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            // If Formspree returns an error, display a generic alert message
+            response.json().then((data) => {
+              alert(data.error || 'Oops! There was a problem submitting your form.');
+            });
+          }
+        })
+        .catch(() => {
+          alert('Oops! There was a problem submitting your form.');
+        });
     });
   }
 
