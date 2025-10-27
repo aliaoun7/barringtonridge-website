@@ -4,39 +4,22 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   // Eligibility form submission handler
-  const eligibilityForm = document.getElementById('eligibility-form');
-  const successMessage = document.getElementById('form-success');
-  if (eligibilityForm) {
-    eligibilityForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      // Gather form data and submit to the Formspree endpoint specified in the form's action attribute.
-      const formData = new FormData(eligibilityForm);
-      fetch(eligibilityForm.action, {
-        method: eligibilityForm.method,
-        body: formData,
-        headers: {
-          // Accept JSON response so we can detect success or error states
-          'Accept': 'application/json',
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            // Show success message and reset form on successful submission
-            successMessage.hidden = false;
-            eligibilityForm.reset();
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          } else {
-            // If Formspree returns an error, display a generic alert message
-            response.json().then((data) => {
-              alert(data.error || 'Oops! There was a problem submitting your form.');
-            });
-          }
-        })
-        .catch(() => {
-          alert('Oops! There was a problem submitting your form.');
-        });
-    });
-  }
+  //
+  // Formspree's free plan does not support AJAX submissions. To ensure
+  // successful delivery of form data, we allow the browser to submit the
+  // form normally via POST to the endpoint specified in the form's
+  // `action` attribute. The Formspree service will handle the
+  // submission and display its default success page or send a follow-up
+  // email to the business. If you upgrade to a paid plan that
+  // supports AJAX, you can reintroduce an event listener here to send
+  // the form asynchronously and display a custom success message.
+  //
+  // NOTE: Because we're not intercepting the submit event, the
+  // browser will follow Formspree's redirect after submission. To
+  // modify this behaviour (e.g., redirect back to a page on your
+  // domain), you can add a hidden input named `_next` to the form in
+  // index.html with the desired URL. See Formspree documentation for
+  // details.
 
   // Highlight active nav link on scroll
   const sections = document.querySelectorAll('section[id]');
