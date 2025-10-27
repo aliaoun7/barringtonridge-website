@@ -20,6 +20,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- AOS (Animate On Scroll) library styles -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.css"
+    />
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -46,7 +51,7 @@
     <!-- Hero section -->
     <section id="hero" class="hero-section">
       <div class="hero-overlay"></div>
-      <div class="hero-content container">
+      <div class="hero-content container" data-aos="fade-up">
         <!-- Updated slogan to reflect the company's commitment -->
         <h1>Your Property,<br />Our Priority</h1>
         <p>
@@ -60,7 +65,7 @@
 
     <!-- About us -->
     <section id="about" class="dark-section">
-      <div class="container about-wrapper">
+      <div class="container about-wrapper" data-aos="fade-up">
         <h2>About Barrington Ridge</h2>
         <p>
           Barrington Ridge is a Michigan‑based property leasing consultancy that partners with
@@ -84,7 +89,7 @@
       <div class="container">
         <h2>Our Services</h2>
         <div class="services-grid">
-          <div class="service-item">
+          <div class="service-item" data-aos="fade-up" data-aos-delay="0">
             <i class="fa-solid fa-clipboard-check service-icon" aria-hidden="true"></i>
             <h3>Eligibility Evaluation</h3>
             <p>
@@ -93,15 +98,15 @@
               location, condition and market demand.
             </p>
           </div>
-          <div class="service-item">
+          <div class="service-item" data-aos="fade-up" data-aos-delay="100">
             <i class="fa-solid fa-bullhorn service-icon" aria-hidden="true"></i>
             <h3>Property Promotion</h3>
             <p>
               Our marketing team crafts distinguished property profiles and leverages premier channels
-              to ensure your residence reaches discerning guests, maximizing your rental potential.
+              to ensure your residence reaches the right audience, maximizing your rental potential.
             </p>
           </div>
-          <div class="service-item">
+          <div class="service-item" data-aos="fade-up" data-aos-delay="200">
             <i class="fa-solid fa-user-shield service-icon" aria-hidden="true"></i>
             <h3>Guest Screening</h3>
             <p>
@@ -109,7 +114,7 @@
               and treats your property with care.
             </p>
           </div>
-          <div class="service-item">
+          <div class="service-item" data-aos="fade-up" data-aos-delay="300">
             <i class="fa-solid fa-headset service-icon" aria-hidden="true"></i>
             <h3>Ongoing Support</h3>
             <p>
@@ -127,7 +132,7 @@
       <div class="container process-wrapper">
         <h2>Our Process</h2>
         <div class="process-steps">
-          <div class="step">
+          <div class="step" data-aos="fade-up" data-aos-delay="0">
             <div class="step-number">1</div>
             <h3>Initial Consultation</h3>
             <p>
@@ -136,7 +141,7 @@
               information needed to proceed.
             </p>
           </div>
-          <div class="step">
+          <div class="step" data-aos="fade-up" data-aos-delay="100">
             <div class="step-number">2</div>
             <h3>Evaluation &amp; Agreement</h3>
             <p>
@@ -145,7 +150,7 @@
               goals.
             </p>
           </div>
-          <div class="step">
+          <div class="step" data-aos="fade-up" data-aos-delay="200">
             <div class="step-number">3</div>
             <!-- Updated to remove guest references and emphasize a full-service leasing process -->
             <h3>Match &amp; Lease</h3>
@@ -162,7 +167,7 @@
       <div class="container testimonials-wrapper">
         <h2>What Our Clients Say</h2>
         <div class="testimonials-grid">
-          <div class="testimonial">
+          <div class="testimonial" data-aos="fade-up" data-aos-delay="0">
             <p class="quote">
               “Barrington Ridge made leasing my Ann Arbor home effortless. Their
               professionalism and attention to detail ensured I had a
@@ -170,7 +175,7 @@
             </p>
             <p class="client">— Katherine M.</p>
           </div>
-          <div class="testimonial">
+          <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
             <p class="quote">
               “The team at Barrington Ridge handled everything—from listing to
               tenant screening—so I could focus on my move abroad. The
@@ -178,7 +183,7 @@
             </p>
             <p class="client">— Jonathan R.</p>
           </div>
-          <div class="testimonial">
+          <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
             <p class="quote">
               “As an investor with multiple properties, I appreciate the
               transparency and support Barrington Ridge provides. My
@@ -192,7 +197,7 @@
 
     <!-- Eligibility form -->
     <section id="eligibility" class="dark-section eligibility-section">
-      <div class="container eligibility-wrapper">
+      <div class="container eligibility-wrapper" data-aos="fade-up">
         <h2>Check Your Property's Eligibility</h2>
         <p>
           Complete the form below and our leasing specialists will be in touch
@@ -271,7 +276,7 @@
 
     <!-- Contact & footer -->
     <section id="contact" class="light-section contact-section">
-      <div class="container contact-wrapper">
+      <div class="container contact-wrapper" data-aos="fade-up">
         <h2>Contact Us</h2>
         <p>
           Questions about our services or your eligibility? Reach out—we’re
@@ -299,7 +304,9 @@
       </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- AOS (Animate On Scroll) library script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script>
+    <!-- Main JavaScript -->
     <script src="script.js"></script>
   </body>
 </html>
