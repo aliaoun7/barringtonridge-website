@@ -1,310 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Barrington Ridge – Premier Leasing Solutions</title>
-    <!-- Google Fonts for a luxurious aesthetic -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-pIv3M+6RkdKsNVDFMS9kb9fYr9hB6ye0J1hmAPq6NvD8KmAj7g99dN6Z+Vj8ZwK8ta/hMQKCp7s1haYrxLrxwQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- AOS (Animate On Scroll) library styles -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.css"
-    />
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Navigation bar -->
-    <header class="navbar">
-      <div class="container nav-wrapper">
-        <a href="#hero" class="logo" aria-label="Barrington Ridge logo">
-          <img src="logo.png" alt="Barrington Ridge logo" />
-        </a>
-        <nav>
-          <ul class="nav-list">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#eligibility">Eligibility</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barrington Ridge | Private Capital for Real Estate Investors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ridge: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            gold: '#d4af37',
+                            goldLight: '#f4e4a6',
+                            accent: '#059669'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gold-glow {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-track {
+            background: #334155;
+            height: 6px;
+            border-radius: 3px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #d4af37;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            margin-top: -7px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-ridge-900 text-white font-sans antialiased">
 
-    <!-- Hero section -->
-    <section id="hero" class="hero-section">
-      <div class="hero-overlay"></div>
-      <div class="hero-content container" data-aos="fade-up">
-        <!-- Updated slogan to reflect the company's commitment -->
-        <h1>Where Serious Investors<br />Find Reliable Capital.</h1>
-        <p>
-          Unlock the full potential of your Michigan real estate investments with Barrington Ridge. We deliver private hard money financing designed for time-sensitive deals, profitable projects, and experienced investors. With streamlined approvals and dependable closings, we help you turn opportunities into profitable results without unnecessary delays.
-        </p>
-        <a href="#eligibility" class="btn btn-primary">Check Eligibility</a>
-      </div>
-    </section>
-
-    <!-- About us -->
-    <section id="about" class="dark-section">
-      <div class="container about-wrapper" data-aos="fade-up">
-        <h2>About Barrington Ridge</h2>
-        <p>
-          Barrington Ridge is a Michigan‑based property leasing consultancy that partners with
-          homeowners to unlock the full potential of their residences. We handle everything
-          from preparing and promoting your property to managing occupancy and maintenance,
-          transforming your home into a premium, revenue‑generating experience while
-          respecting your personal aesthetic.
-        </p>
-        <p>
-          From suburban homes to downtown lofts across Michigan, we curate a portfolio of
-          distinctive residences designed for unique, high‑end experiences. Our
-          tailored leasing solutions provide owners with reliable income and peace of mind.
-          Whether you are away or seeking professional management, we oversee every detail
-          so your property is maintained to the highest standards.
-        </p>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services" class="light-section">
-      <div class="container">
-        <h2>Our Services</h2>
-        <div class="services-grid">
-          <div class="service-item" data-aos="fade-up" data-aos-delay="0">
-            <i class="fa-solid fa-clipboard-check service-icon" aria-hidden="true"></i>
-            <h3>Eligibility Evaluation</h3>
-            <p>
-              We conduct a thorough assessment to determine if your property
-              meets our leasing standards, taking into consideration
-              location, condition and market demand.
-            </p>
-          </div>
-          <div class="service-item" data-aos="fade-up" data-aos-delay="100">
-            <i class="fa-solid fa-bullhorn service-icon" aria-hidden="true"></i>
-            <h3>Property Promotion</h3>
-            <p>
-              Our marketing team crafts distinguished property profiles and leverages premier channels
-              to ensure your residence reaches the right audience, maximizing your rental potential.
-            </p>
-          </div>
-          <div class="service-item" data-aos="fade-up" data-aos-delay="200">
-            <i class="fa-solid fa-user-shield service-icon" aria-hidden="true"></i>
-            <h3>Guest Screening</h3>
-            <p>
-              We conduct rigorous screening and verification to ensure every guest meets our high standards
-              and treats your property with care.
-            </p>
-          </div>
-          <div class="service-item" data-aos="fade-up" data-aos-delay="300">
-            <i class="fa-solid fa-headset service-icon" aria-hidden="true"></i>
-            <h3>Ongoing Support</h3>
-            <p>
-              Enjoy peace of mind with our dedicated support team. We’re
-              available to answer questions, mediate tenant communications
-              and coordinate maintenance.
-            </p>
-          </div>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-ridge-gold to-ridge-goldLight rounded-lg flex items-center justify-center">
+                        <i data-lucide="mountain" class="text-ridge-900 w-6 h-6"></i>
+                    </div>
+                    <span class="font-serif text-2xl font-bold text-white">Barrington<span class="text-ridge-gold">Ridge</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#products" class="text-gray-300 hover:text-ridge-gold transition">Loan Products</a>
+                    <a href="#calculator" class="text-gray-300 hover:text-ridge-gold transition">Deal Calculator</a>
+                    <a href="#markets" class="text-gray-300 hover:text-ridge-gold transition">Markets</a>
+                    <a href="#about" class="text-gray-300 hover:text-ridge-gold transition">About</a>
+                    <button class="bg-ridge-gold text-ridge-900 px-6 py-2 rounded-full font-semibold hover:bg-ridge-goldLight transition transform hover:scale-105">
+                        Get Pre-Approved
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-ridge-gold rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-white/5 border border-ridge-gold/30 rounded-full px-4 py-2">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-ridge-goldLight">Funding loans in 24-48 hours</span>
+                    </div>
+                    <h1 class="font-serif text-5xl lg:text-7xl font-bold leading-tight">
+                        Capital that <br>
+                        <span class="gradient-text">moves as fast</span><br>
+                        as you do
+                    </h1>
+                    <p class="text-xl text-gray-400 max-w-lg">
+                        Hard money lending for serious real estate investors. No red tape. No waiting. Just reliable capital when opportunity knocks.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-ridge-gold text-ridge-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition transform hover:scale-105 shadow-lg shadow-ridge-gold/25">
+                            Start Your Application
+                        </button>
+                        <button class="border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/5 transition flex items-center justify-center space-x-2">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            <span>See How It Works</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-8 pt-4">
+                        <div>
+                            <div class="text-3xl font-bold text-ridge-gold">$500M+</div>
+                            <div class="text-sm text-gray-500">Loans Funded</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/10"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-ridge-gold">24hrs</div>
+                            <div class="text-sm text-gray-500">Average Close</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/10"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-ridge-gold">98%</div>
+                            <div class="text-sm text-gray-500">Repeat Clients</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="glass rounded-2xl p-8 animate-float">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold">Quick Rate Quote</h3>
+                            <span class="text-ridge-gold text-sm">No credit check</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-sm text-gray-400 mb-2 block">Property Value</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" min="100000" max="5000000" value="500000" class="flex-1" id="propertyValue">
+                                    <span class="text-ridge-gold font-mono w-24 text-right" id="propertyValueDisplay">$500k</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-400 mb-2 block">Loan Amount</label>
+                                <div class="flex items-center space-x-4">
+                                    <input type="range" min="50000" max="4000000" value="350000" class="flex-1" id="loanAmount">
+                                    <span class="text-ridge-gold font-mono w-24 text-right" id="loanAmountDisplay">$350k</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-sm text-gray-400 mb-2 block">Loan Type</label>
+                                    <select class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                                        <option>Fix & Flip</option>
+                                        <option>New Construction</option>
+                                        <option>Rental (DSCR)</option>
+                                        <option>Cash-out Refi</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-sm text-gray-400 mb-2 block">Experience</label>
+                                    <select class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                                        <option>1-3 Deals</option>
+                                        <option>4-10 Deals</option>
+                                        <option>10+ Deals</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="bg-ridge-gold/10 border border-ridge-gold/30 rounded-lg p-4 mt-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-gray-400">Estimated Rate</span>
+                                    <span class="text-2xl font-bold text-ridge-gold" id="estimatedRate">10.99%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-400">Monthly Payment</span>
+                                    <span class="text-lg font-semibold" id="monthlyPayment">$3,207</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+                                Get Full Quote
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Process -->
-    <section id="process" class="dark-section">
-      <div class="container process-wrapper">
-        <h2>Our Process</h2>
-        <div class="process-steps">
-          <div class="step" data-aos="fade-up" data-aos-delay="0">
-            <div class="step-number">1</div>
-            <h3>Initial Consultation</h3>
-            <p>
-              Connect with us for a personalised discussion about your
-              property. We’ll answer your questions and gather the
-              information needed to proceed.
-            </p>
-          </div>
-          <div class="step" data-aos="fade-up" data-aos-delay="100">
-            <div class="step-number">2</div>
-            <h3>Evaluation &amp; Agreement</h3>
-            <p>
-              Our experts assess your home, agree on expectations and
-              outline a tailored leasing strategy that aligns with your
-              goals.
-            </p>
-          </div>
-          <div class="step" data-aos="fade-up" data-aos-delay="200">
-            <div class="step-number">3</div>
-            <!-- Updated to remove guest references and emphasize a full-service leasing process -->
-            <h3>Match &amp; Lease</h3>
-            <p>
-              We handle the entire leasing process—from marketing your home and screening prospective occupants to managing agreements—so that every lease runs smoothly and your property remains pristine.
-            </p>
-          </div>
+    <!-- Trust Bar -->
+    <section class="border-y border-white/5 bg-ridge-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
+                <span class="text-sm text-gray-500 uppercase tracking-widest">Featured In</span>
+                <div class="h-8 w-px bg-white/10"></div>
+                <span class="text-xl font-serif font-bold text-gray-400">Forbes</span>
+                <span class="text-xl font-serif font-bold text-gray-400">Bloomberg</span>
+                <span class="text-xl font-serif font-bold text-gray-400">WSJ</span>
+                <span class="text-xl font-serif font-bold text-gray-400">CNBC</span>
+                <span class="text-xl font-serif font-bold text-gray-400">BiggerPockets</span>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Loan Products -->
+    <section id="products" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-4">Loan Programs</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Tailored financing solutions for every investment strategy. Competitive rates, flexible terms, lightning-fast closings.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Fix & Flip -->
+                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
+                    <div class="w-12 h-12 bg-ridge-gold/20 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="home" class="text-ridge-gold w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Fix & Flip</h3>
+                    <p class="text-gray-400 text-sm mb-4">Purchase + rehab funding up to 90% LTC</p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Rates from 9.99%</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> 12-24 month terms</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Interest-only payments</li>
+                    </ul>
+                    <button class="w-full border border-ridge-gold/50 text-ridge-gold py-2 rounded-lg hover:bg-ridge-gold hover:text-ridge-900 transition">Learn More</button>
+                </div>
+
+                <!-- New Construction -->
+                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="building-2" class="text-blue-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Ground Up</h3>
+                    <p class="text-gray-400 text-sm mb-4">100% construction cost coverage</p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Rates from 11.99%</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> 12-18 month terms</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Draw management included</li>
+                    </ul>
+                    <button class="w-full border border-blue-400/50 text-blue-400 py-2 rounded-lg hover:bg-blue-400 hover:text-ridge-900 transition">Learn More</button>
+                </div>
+
+                <!-- DSCR Rental -->
+                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="trending-up" class="text-green-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">DSCR Rental</h3>
+                    <p class="text-gray-400 text-sm mb-4">30-year fixed for income properties</p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Rates from 7.99%</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> No income verification</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Unlimited cash-out</li>
+                    </ul>
+                    <button class="w-full border border-green-400/50 text-green-400 py-2 rounded-lg hover:bg-green-400 hover:text-ridge-900 transition">Learn More</button>
+                </div>
+
+                <!-- Bridge -->
+                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="zap" class="text-purple-400 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Bridge</h3>
+                    <p class="text-gray-400 text-sm mb-4">Short-term acquisition capital</p>
+                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Rates from 9.49%</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> 6-36 month terms</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Close in 48 hours</li>
+                    </ul>
+                    <button class="w-full border border-purple-400/50 text-purple-400 py-2 rounded-lg hover:bg-purple-400 hover:text-ridge-900 transition">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Calculator Section -->
+    <section id="calculator" class="py-24 bg-ridge-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6">Deal Analyzer</h2>
+                    <p class="text-gray-400 text-lg mb-8">Calculate your potential profit before you make an offer. Our advanced calculator factors in holding costs, rehab expenses, and selling costs to give you true net profit projections.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-ridge-gold/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="calculator" class="text-ridge-gold w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Real-time ARV Calculations</h4>
+                                <p class="text-sm text-gray-400">After-repair value estimates based on local comps</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-ridge-gold/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="dollar-sign" class="text-ridge-gold w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">True Cost Analysis</h4>
+                                <p class="text-sm text-gray-400">Includes interest, points, insurance, and utilities</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-ridge-gold/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i data-lucide="shield-check" class="text-ridge-gold w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Risk Assessment</h4>
+                                <p class="text-sm text-gray-400">ROI thresholds and break-even analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-8 border border-ridge-gold/20">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i data-lucide="calculator" class="text-ridge-gold mr-3"></i>
+                        Fix & Flip Calculator
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm text-gray-400 mb-2 block">Purchase Price</label>
+                                <input type="number" id="calcPurchase" value="300000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-400 mb-2 block">Rehab Budget</label>
+                                <input type="number" id="calcRehab" value="50000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm text-gray-400 mb-2 block">ARV (After Repair Value)</label>
+                                <input type="number" id="calcARV" value="450000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-400 mb-2 block">Hold Time (months)</label>
+                                <input type="number" id="calcHold" value="6" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-6 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Loan Amount (90% LTC)</span>
+                                <span class="font-mono" id="resultLoan">$315,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Down Payment</span>
+                                <span class="font-mono" id="resultDown">$35,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Interest Cost (6 months)</span>
+                                <span class="font-mono" id="resultInterest">$17,325</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Points & Fees (2%)</span>
+                                <span class="font-mono" id="resultFees">$6,300</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Selling Costs (6%)</span>
+                                <span class="font-mono" id="resultSelling">$27,000</span>
+                            </div>
+                            <div class="border-t border-white/10 pt-3 flex justify-between items-center">
+                                <span class="text-gray-400">Net Profit</span>
+                                <span class="text-2xl font-bold text-ridge-gold" id="resultProfit">$49,375</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-400">ROI</span>
+                                <span class="text-lg font-bold text-green-400" id="resultROI">141%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-ridge-gold/20 rounded-3xl blur-2xl"></div>
+                    <div class="relative glass rounded-2xl p-8 border border-ridge-gold/30">
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
+                                <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
+                                    <i data-lucide="clock" class="text-green-400 w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Approval in 2 Hours</div>
+                                    <div class="text-sm text-gray-400">Not 2 days. Not 2 weeks.</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
+                                <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                    <i data-lucide="users" class="text-blue-400 w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Dedicated Loan Officer</div>
+                                    <div class="text-sm text-gray-400">One point of contact, always available</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
+                                <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                                    <i data-lucide="file-check" class="text-purple-400 w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">No Doc Options</div>
+                                    <div class="text-sm text-gray-400">Asset-based lending, no tax returns needed</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
+                                <div class="w-12 h-12 bg-ridge-gold/20 rounded-full flex items-center justify-center">
+                                    <i data-lucide="repeat" class="text-ridge-gold w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <div class="font-semibold">Repeat Client Perks</div>
+                                    <div class="text-sm text-gray-400">Reduced rates after 3rd deal</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6">Why top investors<br>choose <span class="gradient-text">The Ridge</span></h2>
+                    <p class="text-gray-400 text-lg mb-8">We've funded over $500 million in loans because we understand what investors need: speed, certainty, and a partner who closes when they say they will.</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-4">
+                            <div class="text-4xl font-bold text-ridge-gold mb-2">0</div>
+                            <div class="text-sm text-gray-400">Appraisal delays<br>(in-house valuation)</div>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="text-4xl font-bold text-ridge-gold mb-2">$0</div>
+                            <div class="text-sm text-gray-400">Application fees<br>or upfront costs</div>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="text-4xl font-bold text-ridge-gold mb-2">50</div>
+                            <div class="text-sm text-gray-400">States served<br>nationwide coverage</div>
+                        </div>
+                        <div class="text-center p-4">
+                            <div class="text-4xl font-bold text-ridge-gold mb-2">24/7</div>
+                            <div class="text-sm text-gray-400">Draw requests<br>processed same day</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="light-section">
-      <div class="container testimonials-wrapper">
-        <h2>What Our Clients Say</h2>
-        <div class="testimonials-grid">
-          <div class="testimonial" data-aos="fade-up" data-aos-delay="0">
-            <p class="quote">
-              “Barrington Ridge made leasing my Ann Arbor home effortless. Their
-              professionalism and attention to detail ensured I had a
-              trustworthy tenant in no time.”
-            </p>
-            <p class="client">— Katherine M.</p>
-          </div>
-          <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
-            <p class="quote">
-              “The team at Barrington Ridge handled everything—from listing to
-              tenant screening—so I could focus on my move abroad. The
-              peace of mind was priceless.”
-            </p>
-            <p class="client">— Jonathan R.</p>
-          </div>
-          <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
-            <p class="quote">
-              “As an investor with multiple properties, I appreciate the
-              transparency and support Barrington Ridge provides. My
-              properties have never been in better hands.”
-            </p>
-            <p class="client">— Sofia L.</p>
-          </div>
+    <section class="py-24 bg-ridge-800/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-4xl lg:text-5xl font-bold text-center mb-16">Investor Success Stories</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass rounded-2xl p-8 border border-white/5 relative">
+                    <i data-lucide="quote" class="text-ridge-gold/30 w-12 h-12 absolute top-4 right-4"></i>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-ridge-gold/20 rounded-full flex items-center justify-center text-ridge-gold font-bold">MR</div>
+                        <div class="ml-3">
+                            <div class="font-semibold">Marcus Rodriguez</div>
+                            <div class="text-sm text-gray-400">Phoenix, AZ • 12 Deals</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">"Closed on a $400k fix & flip in 36 hours. Barrington Ridge didn't just fund the deal—they helped me analyze the ARV and avoid a bad purchase."</p>
+                    <div class="flex text-ridge-gold">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-8 border border-white/5 relative">
+                    <i data-lucide="quote" class="text-ridge-gold/30 w-12 h-12 absolute top-4 right-4"></i>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 font-bold">SK</div>
+                        <div class="ml-3">
+                            <div class="font-semibold">Sarah Kim</div>
+                            <div class="text-sm text-gray-400">Atlanta, GA • 8 Deals</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">"The DSCR program allowed me to refinance my entire portfolio and cash out $2M for new acquisitions. No personal income verification was a game-changer."</p>
+                    <div class="flex text-ridge-gold">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl p-8 border border-white/5 relative">
+                    <i data-lucide="quote" class="text-ridge-gold/30 w-12 h-12 absolute top-4 right-4"></i>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 font-bold">JT</div>
+                        <div class="ml-3">
+                            <div class="font-semibold">James Thompson</div>
+                            <div class="text-sm text-gray-400">Tampa, FL • 25+ Deals</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">"After 25 deals with them, I get preferred rates and a dedicated line of credit. They're not a lender, they're a growth partner."</p>
+                    <div class="flex text-ridge-gold">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Eligibility form -->
-    <section id="eligibility" class="dark-section eligibility-section">
-      <div class="container eligibility-wrapper" data-aos="fade-up">
-        <h2>Check Your Property's Eligibility</h2>
-        <p>
-          Complete the form below and our leasing specialists will be in touch
-          to discuss how we can help you maximise your property’s potential.
-        </p>
-        <!-- Added action and method attributes so form can post to Formspree endpoint -->
-        <!-- Updated Formspree endpoint to correct form ID -->
-        <form id="eligibility-form" class="eligibility-form" action="https://formspree.io/f/mpwowkrz" method="POST">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" required />
-            </div>
-            <div class="form-group full">
-              <label for="address">Property Address</label>
-              <input type="text" id="address" name="address" required />
-            </div>
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" id="city" name="city" required />
-            </div>
-            <div class="form-group">
-              <label for="state">State</label>
-              <input
-                type="text"
-                id="state"
-                name="state"
-                value="Michigan"
-                readonly
-              />
-            </div>
-            <div class="form-group">
-              <label for="zip">ZIP Code</label>
-              <input type="text" id="zip" name="zip" required />
-            </div>
-            <div class="form-group">
-              <label for="property-type">Property Type</label>
-              <select id="property-type" name="property-type" required>
-                <option value="">Select...</option>
-                <option value="single-family">Single‑Family</option>
-                <option value="apartment">Apartment</option>
-                <option value="condo">Condo</option>
-                <option value="townhouse">Townhouse</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="bedrooms">Bedrooms</label>
-              <input type="number" id="bedrooms" name="bedrooms" min="0" required />
-            </div>
-            <div class="form-group">
-              <label for="bathrooms">Bathrooms</label>
-              <input type="number" id="bathrooms" name="bathrooms" min="0" required />
-            </div>
-            <div class="form-group full">
-              <label for="message">Additional Information</label>
-              <textarea id="message" name="message" rows="4" placeholder="Tell us about your property"></textarea>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <p id="form-success" class="form-success-message" hidden>
-            Thank you for your submission! Our team will reach out to you
-            shortly.
-          </p>
-        </form>
-      </div>
-    </section>
-
-    <!-- Contact & footer -->
-    <section id="contact" class="light-section contact-section">
-      <div class="container contact-wrapper" data-aos="fade-up">
-        <h2>Contact Us</h2>
-        <p>
-          Questions about our services or your eligibility? Reach out—we’re
-          here to help.
-        </p>
-        <div class="contact-details">
-          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:info@barringtonridge.biz">info@barringtonridge.biz</a></p>
-          <p><i class="fa-solid fa-phone"></i> (734) 221‑6329</p>
-          <p><i class="fa-solid fa-map-marker-alt"></i> Dearborn, Michigan</p>
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-ridge-gold/20 to-ridge-gold/5"></div>
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d4af37" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
         </div>
-      </div>
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-serif text-4xl lg:text-6xl font-bold mb-6">Ready to fund<br>your next deal?</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Join hundreds of investors who've closed over $500M in deals with Barrington Ridge. Get your term sheet in 2 hours.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-ridge-gold text-ridge-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition transform hover:scale-105 shadow-xl shadow-ridge-gold/25">
+                    Apply Now — It's Free
+                </button>
+                <button class="border-2 border-white/30 text-white px-10 py-4 rounded-full font-semibold hover:bg-white/5 transition">
+                    Schedule a Call
+                </button>
+            </div>
+            <p class="mt-6 text-sm text-gray-400">No credit check required for initial quote • No application fees • 24-48 hour funding</p>
+        </div>
     </section>
 
-    <footer class="footer dark-section">
-      <div class="container footer-wrapper">
-        <p>&copy; 2025 Barrington Ridge. All rights reserved.</p>
-        <ul class="footer-nav">
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#eligibility">Eligibility</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
+    <!-- Footer -->
+    <footer class="bg-ridge-900 border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-ridge-gold to-ridge-goldLight rounded-lg flex items-center justify-center">
+                            <i data-lucide="mountain" class="text-ridge-900 w-5 h-5"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold">Barrington<span class="text-ridge-gold">Ridge</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-sm">Private capital for real estate investors. Fast, flexible, and reliable funding for fix & flip, new construction, and rental properties nationwide.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Loan Products</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-ridge-gold transition">Fix & Flip</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">New Construction</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">DSCR Rental</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">Bridge Loans</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">Cash-out Refi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-ridge-gold transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">Partner With Us</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-ridge-gold transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">© 2024 Barrington Ridge Capital. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0 text-sm text-gray-500">
+                    <a href="#" class="hover:text-ridge-gold transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-ridge-gold transition">Terms of Service</a>
+                    <a href="#" class="hover:text-ridge-gold transition">NMLS #123456</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- AOS (Animate On Scroll) library script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script>
-    <!-- Main JavaScript -->
-    <script src="script.js"></script>
-  </body>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Calculator Logic
+        const propertyValue = document.getElementById('propertyValue');
+        const propertyValueDisplay = document.getElementById('propertyValueDisplay');
+        const loanAmount = document.getElementById('loanAmount');
+        const loanAmountDisplay = document.getElementById('loanAmountDisplay');
+        const estimatedRate = document.getElementById('estimatedRate');
+        const monthlyPayment = document.getElementById('monthlyPayment');
+
+        function formatCurrency(value) {
+            if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
+            if (value >= 1000) return '$' + (value / 1000).toFixed(0) + 'k';
+            return '$' + value;
+        }
+
+        function calculateLoan() {
+            const pv = parseInt(propertyValue.value);
+            const la = parseInt(loanAmount.value);
+            const ltv = (la / pv) * 100;
+
+            // Rate based on LTV
+            let rate = 10.99;
+            if (ltv <= 60) rate = 9.99;
+            else if (ltv <= 70) rate = 10.49;
+            else if (ltv <= 80) rate = 10.99;
+            else rate = 11.49;
+
+            estimatedRate.textContent = rate.toFixed(2) + '%';
+
+            // Monthly interest-only payment
+            const monthly = (la * (rate / 100)) / 12;
+            monthlyPayment.textContent = '$' + monthly.toLocaleString('en-US', {maximumFractionDigits: 0});
+        }
+
+        propertyValue.addEventListener('input', (e) => {
+            propertyValueDisplay.textContent = formatCurrency(e.target.value);
+            calculateLoan();
+        });
+
+        loanAmount.addEventListener('input', (e) => {
+            loanAmountDisplay.textContent = formatCurrency(e.target.value);
+            calculateLoan();
+        });
+
+        // Deal Analyzer Logic
+        const calcPurchase = document.getElementById('calcPurchase');
+        const calcRehab = document.getElementById('calcRehab');
+        const calcARV = document.getElementById('calcARV');
+        const calcHold = document.getElementById('calcHold');
+
+        const resultLoan = document.getElementById('resultLoan');
+        const resultDown = document.getElementById('resultDown');
+        const resultInterest = document.getElementById('resultInterest');
+        const resultFees = document.getElementById('resultFees');
+        const resultSelling = document.getElementById('resultSelling');
+        const resultProfit = document.getElementById('resultProfit');
+        const resultROI = document.getElementById('resultROI');
+
+        function calculateDeal() {
+            const purchase = parseInt(calcPurchase.value) || 0;
+            const rehab = parseInt(calcRehab.value) || 0;
+            const arv = parseInt(calcARV.value) || 0;
+            const hold = parseInt(calcHold.value) || 0;
+
+            const totalCost = purchase + rehab;
+            const loanAmount = totalCost * 0.9; // 90% LTC
+            const downPayment = totalCost - loanAmount;
+            const interestRate = 0.1099; // 10.99%
+            const monthlyInterest = (loanAmount * interestRate) / 12;
+            const totalInterest = monthlyInterest * hold;
+            const points = loanAmount * 0.02; // 2 points
+            const sellingCosts = arv * 0.06; // 6% selling costs
+
+            const netProfit = arv - loanAmount - downPayment - totalInterest - points - sellingCosts;
+            const cashInvested = downPayment + totalInterest + points;
+            const roi = cashInvested > 0 ? ((netProfit / cashInvested) * 100) : 0;
+
+            resultLoan.textContent = '$' + loanAmount.toLocaleString();
+            resultDown.textContent = '$' + downPayment.toLocaleString();
+            resultInterest.textContent = '$' + totalInterest.toLocaleString(undefined, {maximumFractionDigits: 0});
+            resultFees.textContent = '$' + points.toLocaleString(undefined, {maximumFractionDigits: 0});
+            resultSelling.textContent = '$' + sellingCosts.toLocaleString(undefined, {maximumFractionDigits: 0});
+            resultProfit.textContent = '$' + netProfit.toLocaleString(undefined, {maximumFractionDigits: 0});
+            resultROI.textContent = roi.toFixed(0) + '%';
+
+            // Color coding
+            if (netProfit < 0) {
+                resultProfit.classList.remove('text-ridge-gold');
+                resultProfit.classList.add('text-red-400');
+            } else {
+                resultProfit.classList.remove('text-red-400');
+                resultProfit.classList.add('text-ridge-gold');
+            }
+        }
+
+        [calcPurchase, calcRehab, calcARV, calcHold].forEach(input => {
+            input.addEventListener('input', calculateDeal);
+        });
+
+        // Initialize calculations
+        calculateLoan();
+        calculateDeal();
+    </script>
+</body>
 </html>
