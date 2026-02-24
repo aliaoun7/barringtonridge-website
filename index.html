@@ -1,730 +1,1067 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barrington Ridge | Private Capital for Real Estate Investors</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ridge: {
-                            900: '#0f172a',
-                            800: '#1e293b',
-                            700: '#334155',
-                            gold: '#d4af37',
-                            goldLight: '#f4e4a6',
-                            accent: '#059669'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
-                    }
-                }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barrington Ridge | Private Capital for Real Estate Investors</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ridge: {
+              900: "#0f172a",
+              850: "#142034",
+              800: "#1e293b",
+              700: "#334155",
+              600: "#475569",
+              gold: "#d4af37",
+              goldLight: "#f4e4a6",
+              accent: "#059669"
             }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            serif: ["Playfair Display", "serif"]
+          }
         }
-    </script>
-    <style>
-        .gradient-text {
-            background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 50%, #d4af37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        .animate-pulse-slow {
-            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .gold-glow {
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            cursor: pointer;
-        }
-        input[type="range"]::-webkit-slider-track {
-            background: #334155;
-            height: 6px;
-            border-radius: 3px;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            background: #d4af37;
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            margin-top: -7px;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-    </style>
-<base target="_blank">
+      }
+    };
+  </script>
+
+  <style>
+    .gradient-text{
+      background: linear-gradient(135deg,#d4af37 0%,#f4e4a6 50%,#d4af37 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .hero-gradient{ background: radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,0.20), transparent 60%),
+                               radial-gradient(900px 500px at 85% 30%, rgba(59,130,246,0.18), transparent 55%),
+                               linear-gradient(135deg,#0f172a 0%,#1e293b 55%,#0f172a 100%); }
+    .glass{ background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.10); }
+    .card-hover{ transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+    .card-hover:hover{ transform: translateY(-8px); border-color: rgba(212,175,55,0.35); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+    .shadow-gold{ box-shadow: 0 18px 40px rgba(212,175,55,.15); }
+
+    /* Buttons */
+    .btn-press{ transform: translateY(0); transition: transform .15s ease; }
+    .btn-press:active{ transform: translateY(2px); }
+    .btn-shine{ position: relative; overflow: hidden; }
+    .btn-shine:before{
+      content:""; position:absolute; top:-60%; left:-40%;
+      width:40%; height:220%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transform: rotate(18deg);
+      transition: left .75s ease;
+    }
+    .btn-shine:hover:before{ left: 120%; }
+
+    /* Range */
+    input[type="range"]{ -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer; }
+    input[type="range"]::-webkit-slider-track{ background:#334155; height:6px; border-radius:3px; }
+    input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance:none; appearance:none;
+      background:#d4af37; height:20px; width:20px; border-radius:50%; margin-top:-7px;
+      box-shadow:0 0 10px rgba(212,175,55,.5);
+    }
+
+    /* Scroll reveal */
+    .reveal{ opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show{ opacity:1; transform: translateY(0); }
+
+    /* Modal */
+    .modal-hidden{ display:none; }
+    .modal-backdrop{ background: rgba(0,0,0,.62); }
+
+    /* Gradient border ring */
+    .ring-gold{
+      position: relative;
+    }
+    .ring-gold:before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(212,175,55,.55), rgba(244,228,166,.15), rgba(59,130,246,.18));
+      z-index:-1;
+      opacity:.9;
+    }
+
+    /* Nav state */
+    .nav-solid{
+      background: rgba(15,23,42,.78);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+    }
+  </style>
 </head>
+
 <body class="bg-ridge-900 text-white font-sans antialiased">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-gradient-to-br from-ridge-gold to-ridge-goldLight rounded-lg flex items-center justify-center">
-                        <i data-lucide="mountain" class="text-ridge-900 w-6 h-6"></i>
-                    </div>
-                    <span class="font-serif text-2xl font-bold text-white">Barrington<span class="text-ridge-gold">Ridge</span></span>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#products" class="text-gray-300 hover:text-ridge-gold transition">Loan Products</a>
-                    <a href="#calculator" class="text-gray-300 hover:text-ridge-gold transition">Deal Calculator</a>
-                    <a href="#markets" class="text-gray-300 hover:text-ridge-gold transition">Markets</a>
-                    <a href="#about" class="text-gray-300 hover:text-ridge-gold transition">About</a>
-                    <button class="bg-ridge-gold text-ridge-900 px-6 py-2 rounded-full font-semibold hover:bg-ridge-goldLight transition transform hover:scale-105">
-                        Get Pre-Approved
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+  <!-- NAV -->
+  <nav id="nav" class="fixed w-full z-50 transition">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <button id="btnHome" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 bg-gradient-to-br from-ridge-gold to-ridge-goldLight rounded-lg flex items-center justify-center shadow-gold">
+            <i data-lucide="mountain" class="text-ridge-900 w-6 h-6"></i>
+          </div>
+          <span class="font-serif text-2xl font-bold text-white">
+            Barrington<span class="text-ridge-gold">Ridge</span>
+          </span>
+        </button>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-ridge-gold rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="hidden md:flex items-center space-x-8">
+          <button data-scroll="#products" class="text-gray-300 hover:text-ridge-gold transition">Loan Products</button>
+          <button data-scroll="#calculator" class="text-gray-300 hover:text-ridge-gold transition">Deal Calculator</button>
+          <button data-scroll="#process" class="text-gray-300 hover:text-ridge-gold transition">Process</button>
+          <button data-scroll="#faq" class="text-gray-300 hover:text-ridge-gold transition">FAQ</button>
+
+          <button id="btnPreapprove"
+                  class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-6 py-2 rounded-full font-semibold hover:bg-ridge-goldLight transition transform hover:scale-[1.02]">
+            Get Pre-Approved
+          </button>
         </div>
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <div class="inline-flex items-center space-x-2 bg-white/5 border border-ridge-gold/30 rounded-full px-4 py-2">
-                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                        <span class="text-sm text-ridge-goldLight">Funding loans in 24-48 hours</span>
-                    </div>
-                    <h1 class="font-serif text-5xl lg:text-7xl font-bold leading-tight">
-                        Capital that <br>
-                        <span class="gradient-text">moves as fast</span><br>
-                        as you do
-                    </h1>
-                    <p class="text-xl text-gray-400 max-w-lg">
-                        Hard money lending for serious real estate investors. No red tape. No waiting. Just reliable capital when opportunity knocks.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-ridge-gold text-ridge-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition transform hover:scale-105 shadow-lg shadow-ridge-gold/25">
-                            Start Your Application
-                        </button>
-                        <button class="border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/5 transition flex items-center justify-center space-x-2">
-                            <i data-lucide="play-circle" class="w-5 h-5"></i>
-                            <span>See How It Works</span>
-                        </button>
-                    </div>
-                    <div class="flex items-center space-x-8 pt-4">
-                        <div>
-                            <div class="text-3xl font-bold text-ridge-gold">$500M+</div>
-                            <div class="text-sm text-gray-500">Loans Funded</div>
-                        </div>
-                        <div class="w-px h-12 bg-white/10"></div>
-                        <div>
-                            <div class="text-3xl font-bold text-ridge-gold">24hrs</div>
-                            <div class="text-sm text-gray-500">Average Close</div>
-                        </div>
-                        <div class="w-px h-12 bg-white/10"></div>
-                        <div>
-                            <div class="text-3xl font-bold text-ridge-gold">98%</div>
-                            <div class="text-sm text-gray-500">Repeat Clients</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="glass rounded-2xl p-8 animate-float">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-xl font-semibold">Quick Rate Quote</h3>
-                            <span class="text-ridge-gold text-sm">No credit check</span>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="text-sm text-gray-400 mb-2 block">Property Value</label>
-                                <div class="flex items-center space-x-4">
-                                    <input type="range" min="100000" max="5000000" value="500000" class="flex-1" id="propertyValue">
-                                    <span class="text-ridge-gold font-mono w-24 text-right" id="propertyValueDisplay">$500k</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-sm text-gray-400 mb-2 block">Loan Amount</label>
-                                <div class="flex items-center space-x-4">
-                                    <input type="range" min="50000" max="4000000" value="350000" class="flex-1" id="loanAmount">
-                                    <span class="text-ridge-gold font-mono w-24 text-right" id="loanAmountDisplay">$350k</span>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label class="text-sm text-gray-400 mb-2 block">Loan Type</label>
-                                    <select class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
-                                        <option>Fix & Flip</option>
-                                        <option>New Construction</option>
-                                        <option>Rental (DSCR)</option>
-                                        <option>Cash-out Refi</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="text-sm text-gray-400 mb-2 block">Experience</label>
-                                    <select class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
-                                        <option>1-3 Deals</option>
-                                        <option>4-10 Deals</option>
-                                        <option>10+ Deals</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="bg-ridge-gold/10 border border-ridge-gold/30 rounded-lg p-4 mt-4">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm text-gray-400">Estimated Rate</span>
-                                    <span class="text-2xl font-bold text-ridge-gold" id="estimatedRate">10.99%</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-400">Monthly Payment</span>
-                                    <span class="text-lg font-semibold" id="monthlyPayment">$3,207</span>
-                                </div>
-                            </div>
-                            <button class="w-full bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
-                                Get Full Quote
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Mobile -->
+        <button id="btnMobile" class="md:hidden w-10 h-10 rounded-lg hover:bg-white/5 flex items-center justify-center">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="md:hidden hidden pb-4">
+        <div class="glass rounded-2xl p-4 space-y-2">
+          <button data-scroll="#products" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Loan Products</button>
+          <button data-scroll="#calculator" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Deal Calculator</button>
+          <button data-scroll="#process" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Process</button>
+          <button data-scroll="#faq" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">FAQ</button>
+          <button id="btnPreapproveMobile" class="w-full btn-press btn-shine bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+            Get Pre-Approved
+          </button>
         </div>
-    </section>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Trust Bar -->
-    <section class="border-y border-white/5 bg-ridge-800/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
-                <span class="text-sm text-gray-500 uppercase tracking-widest">Featured In</span>
-                <div class="h-8 w-px bg-white/10"></div>
-                <span class="text-xl font-serif font-bold text-gray-400">Forbes</span>
-                <span class="text-xl font-serif font-bold text-gray-400">Bloomberg</span>
-                <span class="text-xl font-serif font-bold text-gray-400">WSJ</span>
-                <span class="text-xl font-serif font-bold text-gray-400">CNBC</span>
-                <span class="text-xl font-serif font-bold text-gray-400">BiggerPockets</span>
+  <!-- HERO -->
+  <section id="top" class="relative pt-32 pb-20 lg:pt-48 lg:pb-28 overflow-hidden">
+    <div class="absolute inset-0 hero-gradient"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8 reveal">
+          <div class="inline-flex items-center space-x-2 bg-white/5 border border-ridge-gold/30 rounded-full px-4 py-2">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span class="text-sm text-ridge-goldLight">Funding loans in 24–48 hours</span>
+          </div>
+
+          <h1 class="font-serif text-5xl lg:text-7xl font-bold leading-tight">
+            Capital that <br>
+            <span class="gradient-text">moves as fast</span><br>
+            as you do
+          </h1>
+
+          <p class="text-xl text-gray-300 max-w-xl">
+            Private lending built for serious investors. Clean terms, fast underwriting, and a team that closes when they say they will.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button id="btnStartApp"
+                    class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition shadow-gold">
+              Start Your Application
+            </button>
+
+            <button id="btnHowItWorks"
+                    class="btn-press border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/5 transition flex items-center justify-center space-x-2">
+              <i data-lucide="play-circle" class="w-5 h-5"></i>
+              <span>See How It Works</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-3 gap-6 pt-4">
+            <div class="glass rounded-2xl p-4 border border-white/10">
+              <div class="text-3xl font-bold text-ridge-gold"><span data-count="500" data-suffix="M+">0</span></div>
+              <div class="text-sm text-gray-400">Loans Funded</div>
             </div>
+            <div class="glass rounded-2xl p-4 border border-white/10">
+              <div class="text-3xl font-bold text-ridge-gold"><span data-count="24" data-suffix="hrs">0</span></div>
+              <div class="text-sm text-gray-400">Avg Close</div>
+            </div>
+            <div class="glass rounded-2xl p-4 border border-white/10">
+              <div class="text-3xl font-bold text-ridge-gold"><span data-count="98" data-suffix="%">0</span></div>
+              <div class="text-sm text-gray-400">Repeat Clients</div>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Loan Products -->
-    <section id="products" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-4">Loan Programs</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Tailored financing solutions for every investment strategy. Competitive rates, flexible terms, lightning-fast closings.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Fix & Flip -->
-                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
-                    <div class="w-12 h-12 bg-ridge-gold/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="home" class="text-ridge-gold w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Fix & Flip</h3>
-                    <p class="text-gray-400 text-sm mb-4">Purchase + rehab funding up to 90% LTC</p>
-                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Rates from 9.99%</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> 12-24 month terms</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Interest-only payments</li>
-                    </ul>
-                    <button class="w-full border border-ridge-gold/50 text-ridge-gold py-2 rounded-lg hover:bg-ridge-gold hover:text-ridge-900 transition">Learn More</button>
-                </div>
+        <!-- Quote Card -->
+        <div class="relative reveal" style="transition-delay:.1s;">
+          <div class="ring-gold rounded-2xl">
+            <div class="glass rounded-2xl p-8 shadow-gold">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold">Quick Rate Quote</h3>
+                <span class="text-ridge-gold text-sm">No credit check</span>
+              </div>
 
-                <!-- New Construction -->
-                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
-                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="building-2" class="text-blue-400 w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Ground Up</h3>
-                    <p class="text-gray-400 text-sm mb-4">100% construction cost coverage</p>
-                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Rates from 11.99%</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> 12-18 month terms</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Draw management included</li>
-                    </ul>
-                    <button class="w-full border border-blue-400/50 text-blue-400 py-2 rounded-lg hover:bg-blue-400 hover:text-ridge-900 transition">Learn More</button>
-                </div>
-
-                <!-- DSCR Rental -->
-                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
-                    <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="trending-up" class="text-green-400 w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">DSCR Rental</h3>
-                    <p class="text-gray-400 text-sm mb-4">30-year fixed for income properties</p>
-                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Rates from 7.99%</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> No income verification</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Unlimited cash-out</li>
-                    </ul>
-                    <button class="w-full border border-green-400/50 text-green-400 py-2 rounded-lg hover:bg-green-400 hover:text-ridge-900 transition">Learn More</button>
-                </div>
-
-                <!-- Bridge -->
-                <div class="glass rounded-2xl p-6 card-hover border border-white/5">
-                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="zap" class="text-purple-400 w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Bridge</h3>
-                    <p class="text-gray-400 text-sm mb-4">Short-term acquisition capital</p>
-                    <ul class="space-y-2 text-sm text-gray-300 mb-6">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Rates from 9.49%</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> 6-36 month terms</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Close in 48 hours</li>
-                    </ul>
-                    <button class="w-full border border-purple-400/50 text-purple-400 py-2 rounded-lg hover:bg-purple-400 hover:text-ridge-900 transition">Learn More</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Calculator Section -->
-    <section id="calculator" class="py-24 bg-ridge-800/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+              <div class="space-y-4">
                 <div>
-                    <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6">Deal Analyzer</h2>
-                    <p class="text-gray-400 text-lg mb-8">Calculate your potential profit before you make an offer. Our advanced calculator factors in holding costs, rehab expenses, and selling costs to give you true net profit projections.</p>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 bg-ridge-gold/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <i data-lucide="calculator" class="text-ridge-gold w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Real-time ARV Calculations</h4>
-                                <p class="text-sm text-gray-400">After-repair value estimates based on local comps</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 bg-ridge-gold/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <i data-lucide="dollar-sign" class="text-ridge-gold w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">True Cost Analysis</h4>
-                                <p class="text-sm text-gray-400">Includes interest, points, insurance, and utilities</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 bg-ridge-gold/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <i data-lucide="shield-check" class="text-ridge-gold w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Risk Assessment</h4>
-                                <p class="text-sm text-gray-400">ROI thresholds and break-even analysis</p>
-                            </div>
-                        </div>
-                    </div>
+                  <label class="text-sm text-gray-400 mb-2 block">Property Value</label>
+                  <div class="flex items-center space-x-4">
+                    <input type="range" min="100000" max="5000000" value="500000" class="flex-1" id="propertyValue">
+                    <span class="text-ridge-gold font-mono w-24 text-right" id="propertyValueDisplay">$500k</span>
+                  </div>
                 </div>
-                <div class="glass rounded-2xl p-8 border border-ridge-gold/20">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center">
-                        <i data-lucide="calculator" class="text-ridge-gold mr-3"></i>
-                        Fix & Flip Calculator
-                    </h3>
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-sm text-gray-400 mb-2 block">Purchase Price</label>
-                                <input type="number" id="calcPurchase" value="300000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
-                            </div>
-                            <div>
-                                <label class="text-sm text-gray-400 mb-2 block">Rehab Budget</label>
-                                <input type="number" id="calcRehab" value="50000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-sm text-gray-400 mb-2 block">ARV (After Repair Value)</label>
-                                <input type="number" id="calcARV" value="450000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
-                            </div>
-                            <div>
-                                <label class="text-sm text-gray-400 mb-2 block">Hold Time (months)</label>
-                                <input type="number" id="calcHold" value="6" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
-                            </div>
-                        </div>
-                        <div class="border-t border-white/10 pt-6 space-y-3">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Loan Amount (90% LTC)</span>
-                                <span class="font-mono" id="resultLoan">$315,000</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Down Payment</span>
-                                <span class="font-mono" id="resultDown">$35,000</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Interest Cost (6 months)</span>
-                                <span class="font-mono" id="resultInterest">$17,325</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Points & Fees (2%)</span>
-                                <span class="font-mono" id="resultFees">$6,300</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Selling Costs (6%)</span>
-                                <span class="font-mono" id="resultSelling">$27,000</span>
-                            </div>
-                            <div class="border-t border-white/10 pt-3 flex justify-between items-center">
-                                <span class="text-gray-400">Net Profit</span>
-                                <span class="text-2xl font-bold text-ridge-gold" id="resultProfit">$49,375</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-400">ROI</span>
-                                <span class="text-lg font-bold text-green-400" id="resultROI">141%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Why Choose Us -->
-    <section class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="relative">
-                    <div class="absolute -inset-4 bg-ridge-gold/20 rounded-3xl blur-2xl"></div>
-                    <div class="relative glass rounded-2xl p-8 border border-ridge-gold/30">
-                        <div class="space-y-6">
-                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
-                                <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
-                                    <i data-lucide="clock" class="text-green-400 w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Approval in 2 Hours</div>
-                                    <div class="text-sm text-gray-400">Not 2 days. Not 2 weeks.</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
-                                <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
-                                    <i data-lucide="users" class="text-blue-400 w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Dedicated Loan Officer</div>
-                                    <div class="text-sm text-gray-400">One point of contact, always available</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
-                                <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
-                                    <i data-lucide="file-check" class="text-purple-400 w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">No Doc Options</div>
-                                    <div class="text-sm text-gray-400">Asset-based lending, no tax returns needed</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-4 bg-white/5 rounded-lg">
-                                <div class="w-12 h-12 bg-ridge-gold/20 rounded-full flex items-center justify-center">
-                                    <i data-lucide="repeat" class="text-ridge-gold w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Repeat Client Perks</div>
-                                    <div class="text-sm text-gray-400">Reduced rates after 3rd deal</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div>
-                    <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6">Why top investors<br>choose <span class="gradient-text">The Ridge</span></h2>
-                    <p class="text-gray-400 text-lg mb-8">We've funded over $500 million in loans because we understand what investors need: speed, certainty, and a partner who closes when they say they will.</p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="text-center p-4">
-                            <div class="text-4xl font-bold text-ridge-gold mb-2">0</div>
-                            <div class="text-sm text-gray-400">Appraisal delays<br>(in-house valuation)</div>
-                        </div>
-                        <div class="text-center p-4">
-                            <div class="text-4xl font-bold text-ridge-gold mb-2">$0</div>
-                            <div class="text-sm text-gray-400">Application fees<br>or upfront costs</div>
-                        </div>
-                        <div class="text-center p-4">
-                            <div class="text-4xl font-bold text-ridge-gold mb-2">50</div>
-                            <div class="text-sm text-gray-400">States served<br>nationwide coverage</div>
-                        </div>
-                        <div class="text-center p-4">
-                            <div class="text-4xl font-bold text-ridge-gold mb-2">24/7</div>
-                            <div class="text-sm text-gray-400">Draw requests<br>processed same day</div>
-                        </div>
-                    </div>
+                  <label class="text-sm text-gray-400 mb-2 block">Loan Amount</label>
+                  <div class="flex items-center space-x-4">
+                    <input type="range" min="50000" max="4000000" value="350000" class="flex-1" id="loanAmount">
+                    <span class="text-ridge-gold font-mono w-24 text-right" id="loanAmountDisplay">$350k</span>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Testimonials -->
-    <section class="py-24 bg-ridge-800/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="font-serif text-4xl lg:text-5xl font-bold text-center mb-16">Investor Success Stories</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass rounded-2xl p-8 border border-white/5 relative">
-                    <i data-lucide="quote" class="text-ridge-gold/30 w-12 h-12 absolute top-4 right-4"></i>
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-ridge-gold/20 rounded-full flex items-center justify-center text-ridge-gold font-bold">MR</div>
-                        <div class="ml-3">
-                            <div class="font-semibold">Marcus Rodriguez</div>
-                            <div class="text-sm text-gray-400">Phoenix, AZ • 12 Deals</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">"Closed on a $400k fix & flip in 36 hours. Barrington Ridge didn't just fund the deal—they helped me analyze the ARV and avoid a bad purchase."</p>
-                    <div class="flex text-ridge-gold">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm text-gray-400 mb-2 block">Loan Type</label>
+                    <select id="quoteLoanType" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                      <option>Fix & Flip</option>
+                      <option>New Construction</option>
+                      <option>Rental (DSCR)</option>
+                      <option>Cash-out Refi</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-sm text-gray-400 mb-2 block">Experience</label>
+                    <select id="quoteExperience" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+                      <option>1-3 Deals</option>
+                      <option>4-10 Deals</option>
+                      <option>10+ Deals</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="glass rounded-2xl p-8 border border-white/5 relative">
-                    <i data-lucide="quote" class="text-ridge-gold/30 w-12 h-12 absolute top-4 right-4"></i>
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 font-bold">SK</div>
-                        <div class="ml-3">
-                            <div class="font-semibold">Sarah Kim</div>
-                            <div class="text-sm text-gray-400">Atlanta, GA • 8 Deals</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">"The DSCR program allowed me to refinance my entire portfolio and cash out $2M for new acquisitions. No personal income verification was a game-changer."</p>
-                    <div class="flex text-ridge-gold">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    </div>
-                </div>
-                <div class="glass rounded-2xl p-8 border border-white/5 relative">
-                    <i data-lucide="quote" class="text-ridge-gold/30 w-12 h-12 absolute top-4 right-4"></i>
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 font-bold">JT</div>
-                        <div class="ml-3">
-                            <div class="font-semibold">James Thompson</div>
-                            <div class="text-sm text-gray-400">Tampa, FL • 25+ Deals</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mb-4">"After 25 deals with them, I get preferred rates and a dedicated line of credit. They're not a lender, they're a growth partner."</p>
-                    <div class="flex text-ridge-gold">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-ridge-gold/20 to-ridge-gold/5"></div>
-        <div class="absolute inset-0 opacity-30">
-            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d4af37" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
-        </div>
-        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="font-serif text-4xl lg:text-6xl font-bold mb-6">Ready to fund<br>your next deal?</h2>
-            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Join hundreds of investors who've closed over $500M in deals with Barrington Ridge. Get your term sheet in 2 hours.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-ridge-gold text-ridge-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition transform hover:scale-105 shadow-xl shadow-ridge-gold/25">
-                    Apply Now — It's Free
+                <div class="bg-ridge-gold/10 border border-ridge-gold/30 rounded-lg p-4 mt-4">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm text-gray-400">Estimated Rate</span>
+                    <span class="text-2xl font-bold text-ridge-gold" id="estimatedRate">10.99%</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-400">Monthly Payment</span>
+                    <span class="text-lg font-semibold" id="monthlyPayment">$3,207</span>
+                  </div>
+                </div>
+
+                <button id="btnFullQuote" class="w-full btn-press btn-shine bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+                  Get Full Quote
                 </button>
-                <button class="border-2 border-white/30 text-white px-10 py-4 rounded-full font-semibold hover:bg-white/5 transition">
-                    Schedule a Call
-                </button>
-            </div>
-            <p class="mt-6 text-sm text-gray-400">No credit check required for initial quote • No application fees • 24-48 hour funding</p>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-ridge-900 border-t border-white/10 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <div class="col-span-2">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-ridge-gold to-ridge-goldLight rounded-lg flex items-center justify-center">
-                            <i data-lucide="mountain" class="text-ridge-900 w-5 h-5"></i>
-                        </div>
-                        <span class="font-serif text-xl font-bold">Barrington<span class="text-ridge-gold">Ridge</span></span>
-                    </div>
-                    <p class="text-gray-400 mb-4 max-w-sm">Private capital for real estate investors. Fast, flexible, and reliable funding for fix & flip, new construction, and rental properties nationwide.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition">
-                            <i data-lucide="instagram" class="w-5 h-5"></i>
-                        </a>
-                    </div>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Estimate only. Submit the application for a real term sheet.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="border-y border-white/5 bg-ridge-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-wrap justify-center items-center gap-8 opacity-60 reveal">
+        <span class="text-sm text-gray-500 uppercase tracking-widest">Featured In</span>
+        <div class="h-8 w-px bg-white/10"></div>
+        <span class="text-xl font-serif font-bold text-gray-400">Forbes</span>
+        <span class="text-xl font-serif font-bold text-gray-400">Bloomberg</span>
+        <span class="text-xl font-serif font-bold text-gray-400">WSJ</span>
+        <span class="text-xl font-serif font-bold text-gray-400">CNBC</span>
+        <span class="text-xl font-serif font-bold text-gray-400">BiggerPockets</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-4">Loan Programs</h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Tailored financing solutions for every strategy. Competitive terms, fast closings, investor-first underwriting.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal">
+          <div class="w-12 h-12 bg-ridge-gold/20 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="home" class="text-ridge-gold w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Fix & Flip</h3>
+          <p class="text-gray-400 text-sm mb-4">Purchase + rehab funding up to 90% LTC</p>
+          <ul class="space-y-2 text-sm text-gray-300 mb-6">
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Rates from 9.99%</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> 12–24 month terms</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Interest-only payments</li>
+          </ul>
+          <button class="w-full btn-press border border-ridge-gold/45 text-ridge-gold py-2 rounded-lg hover:bg-ridge-gold hover:text-ridge-900 transition"
+                  data-program="Fix & Flip">Learn More</button>
+        </div>
+
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal" style="transition-delay:.05s;">
+          <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="building-2" class="text-blue-400 w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Ground Up</h3>
+          <p class="text-gray-400 text-sm mb-4">Construction funding + draw management</p>
+          <ul class="space-y-2 text-sm text-gray-300 mb-6">
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Rates from 11.99%</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> 12–18 month terms</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Builder-friendly draws</li>
+          </ul>
+          <button class="w-full btn-press border border-blue-400/45 text-blue-400 py-2 rounded-lg hover:bg-blue-400 hover:text-ridge-900 transition"
+                  data-program="Ground Up">Learn More</button>
+        </div>
+
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal" style="transition-delay:.10s;">
+          <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="trending-up" class="text-green-400 w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">DSCR Rental</h3>
+          <p class="text-gray-400 text-sm mb-4">30-year options for income properties</p>
+          <ul class="space-y-2 text-sm text-gray-300 mb-6">
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Rates from 7.99%</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> No income verification</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Portfolio-friendly</li>
+          </ul>
+          <button class="w-full btn-press border border-green-400/45 text-green-400 py-2 rounded-lg hover:bg-green-400 hover:text-ridge-900 transition"
+                  data-program="DSCR Rental">Learn More</button>
+        </div>
+
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal" style="transition-delay:.15s;">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
+            <i data-lucide="zap" class="text-purple-400 w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Bridge</h3>
+          <p class="text-gray-400 text-sm mb-4">Short-term acquisition capital</p>
+          <ul class="space-y-2 text-sm text-gray-300 mb-6">
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Rates from 9.49%</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> 6–36 month terms</li>
+            <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Close in 48 hours</li>
+          </ul>
+          <button class="w-full btn-press border border-purple-400/45 text-purple-400 py-2 rounded-lg hover:bg-purple-400 hover:text-ridge-900 transition"
+                  data-program="Bridge">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section id="calculator" class="py-24 bg-ridge-800/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6">Deal Analyzer</h2>
+          <p class="text-gray-400 text-lg mb-8">
+            Know your numbers before you offer. We calculate loan size, interest, fees, and exit costs to show true net profit.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="glass rounded-2xl p-5 border border-white/10">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-ridge-gold/15 flex items-center justify-center">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-ridge-gold"></i>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Loan Products</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-ridge-gold transition">Fix & Flip</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">New Construction</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">DSCR Rental</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">Bridge Loans</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">Cash-out Refi</a></li>
-                    </ul>
+                  <div class="font-semibold">Faster underwriting</div>
+                  <div class="text-sm text-gray-400">Clear conditions, no drama</div>
+                </div>
+              </div>
+            </div>
+            <div class="glass rounded-2xl p-5 border border-white/10">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center">
+                  <i data-lucide="shield" class="w-5 h-5 text-blue-400"></i>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-ridge-gold transition">About Us</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">Careers</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">Partner With Us</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">Blog</a></li>
-                        <li><a href="#" class="hover:text-ridge-gold transition">Contact</a></li>
-                    </ul>
+                  <div class="font-semibold">Investor-friendly</div>
+                  <div class="text-sm text-gray-400">Built for repeat deals</div>
                 </div>
+              </div>
             </div>
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm">© 2024 Barrington Ridge Capital. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0 text-sm text-gray-500">
-                    <a href="#" class="hover:text-ridge-gold transition">Privacy Policy</a>
-                    <a href="#" class="hover:text-ridge-gold transition">Terms of Service</a>
-                    <a href="#" class="hover:text-ridge-gold transition">NMLS #123456</a>
-                </div>
-            </div>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Initialize Lucide icons
+        <div class="glass rounded-2xl p-8 border border-ridge-gold/20 reveal" style="transition-delay:.05s;">
+          <h3 class="text-2xl font-bold mb-6 flex items-center">
+            <i data-lucide="calculator" class="text-ridge-gold mr-3"></i>
+            Fix & Flip Calculator
+          </h3>
+
+          <div class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm text-gray-400 mb-2 block">Purchase Price</label>
+                <input type="number" id="calcPurchase" value="300000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+              </div>
+              <div>
+                <label class="text-sm text-gray-400 mb-2 block">Rehab Budget</label>
+                <input type="number" id="calcRehab" value="50000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm text-gray-400 mb-2 block">ARV</label>
+                <input type="number" id="calcARV" value="450000" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+              </div>
+              <div>
+                <label class="text-sm text-gray-400 mb-2 block">Hold Time (months)</label>
+                <input type="number" id="calcHold" value="6" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ridge-gold outline-none">
+              </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-6 space-y-3">
+              <div class="flex justify-between text-sm"><span class="text-gray-400">Loan Amount (90% LTC)</span><span class="font-mono" id="resultLoan">$315,000</span></div>
+              <div class="flex justify-between text-sm"><span class="text-gray-400">Down Payment</span><span class="font-mono" id="resultDown">$35,000</span></div>
+              <div class="flex justify-between text-sm"><span class="text-gray-400">Interest Cost</span><span class="font-mono" id="resultInterest">$17,325</span></div>
+              <div class="flex justify-between text-sm"><span class="text-gray-400">Points & Fees (2%)</span><span class="font-mono" id="resultFees">$6,300</span></div>
+              <div class="flex justify-between text-sm"><span class="text-gray-400">Selling Costs (6%)</span><span class="font-mono" id="resultSelling">$27,000</span></div>
+              <div class="border-t border-white/10 pt-3 flex justify-between items-center">
+                <span class="text-gray-400">Net Profit</span>
+                <span class="text-2xl font-bold text-ridge-gold" id="resultProfit">$49,375</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-400">ROI</span>
+                <span class="text-lg font-bold text-green-400" id="resultROI">141%</span>
+              </div>
+
+              <button id="btnEmailResults" class="btn-press w-full mt-4 border border-white/20 hover:border-ridge-gold/60 hover:text-ridge-gold transition rounded-lg py-3 font-semibold">
+                Email Me These Results
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-4">A faster path to funding</h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Clear steps. Fast underwriting. No “mystery conditions.”</p>
+      </div>
+
+      <div class="grid lg:grid-cols-4 gap-6">
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal">
+          <div class="w-12 h-12 rounded-xl bg-ridge-gold/15 flex items-center justify-center mb-4">
+            <i data-lucide="clipboard-check" class="w-6 h-6 text-ridge-gold"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">1) Submit deal</h3>
+          <p class="text-gray-400 text-sm">Address, numbers, exit plan. Takes 2 minutes.</p>
+        </div>
+
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal" style="transition-delay:.05s;">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center mb-4">
+            <i data-lucide="scan-eye" class="w-6 h-6 text-blue-400"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">2) Underwrite</h3>
+          <p class="text-gray-400 text-sm">We review comps and scope. Term sheet in hours.</p>
+        </div>
+
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal" style="transition-delay:.10s;">
+          <div class="w-12 h-12 rounded-xl bg-green-500/15 flex items-center justify-center mb-4">
+            <i data-lucide="file-check" class="w-6 h-6 text-green-400"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">3) Clear conditions</h3>
+          <p class="text-gray-400 text-sm">Simple checklist. Dedicated closer on your file.</p>
+        </div>
+
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal" style="transition-delay:.15s;">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center mb-4">
+            <i data-lucide="zap" class="w-6 h-6 text-purple-400"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">4) Fund fast</h3>
+          <p class="text-gray-400 text-sm">Close in 24–48 hours when ready.</p>
+        </div>
+      </div>
+
+      <!-- Inline lead capture -->
+      <div class="mt-12 glass rounded-2xl p-8 border border-ridge-gold/20 reveal">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div>
+            <h3 class="text-2xl font-bold">Get a term sheet fast</h3>
+            <p class="text-gray-400">Drop your email + deal type. We’ll respond quickly (demo form).</p>
+          </div>
+          <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-3">
+            <input id="inlineEmail" type="email" placeholder="you@email.com"
+                   class="w-full sm:w-72 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-ridge-gold">
+            <select id="inlineType" class="w-full sm:w-56 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-ridge-gold">
+              <option>Fix & Flip</option>
+              <option>Ground Up</option>
+              <option>DSCR Rental</option>
+              <option>Bridge</option>
+            </select>
+            <button id="btnInlineSubmit" class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-6 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+              Get Terms
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24 bg-ridge-800/30">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-4">FAQ</h2>
+        <p class="text-gray-400 text-lg">The questions investors ask before they move.</p>
+      </div>
+
+      <div class="space-y-4">
+        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold">How fast can you close?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+          </div>
+          <div class="faq-body hidden mt-3 text-gray-400 text-sm leading-relaxed">
+            Typically 24–48 hours once we have contract + title + insurance. Complex deals may take longer.
+          </div>
+        </button>
+
+        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal" style="transition-delay:.05s;">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold">Do you check credit?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+          </div>
+          <div class="faq-body hidden mt-3 text-gray-400 text-sm leading-relaxed">
+            Many programs are asset-based. For initial quotes, we can often start without a credit pull.
+          </div>
+        </button>
+
+        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal" style="transition-delay:.10s;">
+          <div class="flex items-center justify-between">
+            <span class="font-semibold">What documents do you need?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+          </div>
+          <div class="faq-body hidden mt-3 text-gray-400 text-sm leading-relaxed">
+            Purchase contract, scope of work, insurance, entity docs, and exit plan. We keep it simple.
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-ridge-gold/18 to-ridge-gold/5"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+      <h2 class="font-serif text-4xl lg:text-6xl font-bold mb-6">Ready to fund<br>your next deal?</h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Get a term sheet fast. Clear conditions. Real closers.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button id="btnApplyNow" class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition shadow-gold">
+          Apply Now — It's Free
+        </button>
+        <button id="btnScheduleCall" class="btn-press border-2 border-white/30 text-white px-10 py-4 rounded-full font-semibold hover:bg-white/5 transition">
+          Schedule a Call
+        </button>
+      </div>
+      <p class="mt-6 text-sm text-gray-400">No credit check required for initial quote • No application fees</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-ridge-900 border-t border-white/10 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-12 reveal">
+        <div class="col-span-2">
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-8 h-8 bg-gradient-to-br from-ridge-gold to-ridge-goldLight rounded-lg flex items-center justify-center shadow-gold">
+              <i data-lucide="mountain" class="text-ridge-900 w-5 h-5"></i>
+            </div>
+            <span class="font-serif text-xl font-bold">Barrington<span class="text-ridge-gold">Ridge</span></span>
+          </div>
+          <p class="text-gray-400 mb-4 max-w-sm">Private capital for real estate investors. Fast, flexible, and reliable funding nationwide.</p>
+          <div class="flex space-x-4">
+            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition" data-social="LinkedIn">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </button>
+            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition" data-social="Twitter">
+              <i data-lucide="twitter" class="w-5 h-5"></i>
+            </button>
+            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition" data-social="Instagram">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Loan Products</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><button class="hover:text-ridge-gold transition" data-program="Fix & Flip">Fix & Flip</button></li>
+            <li><button class="hover:text-ridge-gold transition" data-program="Ground Up">New Construction</button></li>
+            <li><button class="hover:text-ridge-gold transition" data-program="DSCR Rental">DSCR Rental</button></li>
+            <li><button class="hover:text-ridge-gold transition" data-program="Bridge">Bridge Loans</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><button class="hover:text-ridge-gold transition" data-scroll="#process">Process</button></li>
+            <li><button class="hover:text-ridge-gold transition" data-scroll="#faq">FAQ</button></li>
+            <li><button class="hover:text-ridge-gold transition" id="btnContact">Contact</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm">© 2024 Barrington Ridge Capital. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0 text-sm text-gray-500">
+          <button id="btnPrivacy" class="hover:text-ridge-gold transition">Privacy Policy</button>
+          <button id="btnTerms" class="hover:text-ridge-gold transition">Terms of Service</button>
+          <button id="btnNMLS" class="hover:text-ridge-gold transition">NMLS #123456</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal-hidden fixed inset-0 z-[999] flex items-center justify-center p-4">
+    <div id="modalBackdrop" class="absolute inset-0 modal-backdrop"></div>
+    <div class="relative w-full max-w-2xl glass rounded-2xl border border-white/10 overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 id="modalTitle" class="text-xl font-bold">Modal</h3>
+        <button id="modalClose" class="w-10 h-10 rounded-lg hover:bg-white/5 flex items-center justify-center" aria-label="Close">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="modalBody" class="px-6 py-6 text-gray-200"></div>
+      <div id="modalFooter" class="px-6 py-5 border-t border-white/10 flex flex-col sm:flex-row gap-3 sm:justify-end"></div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+    // Nav solid on scroll
+    const nav = $("#nav");
+    function setNav() {
+      if (window.scrollY > 10) nav.classList.add("nav-solid");
+      else nav.classList.remove("nav-solid");
+    }
+    window.addEventListener("scroll", setNav);
+    setNav();
+
+    // Mobile menu
+    const btnMobile = $("#btnMobile");
+    const mobileMenu = $("#mobileMenu");
+    btnMobile.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      lucide.createIcons();
+    });
+
+    // Smooth scroll
+    function scrollToSection(selector) {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      const navHeight = 88;
+      const y = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top: y, behavior: "smooth" });
+      mobileMenu.classList.add("hidden");
+    }
+    $$("[data-scroll]").forEach(btn => btn.addEventListener("click", () => scrollToSection(btn.getAttribute("data-scroll"))));
+    $("#btnHome").addEventListener("click", () => scrollToSection("#top"));
+
+    // Scroll reveal
+    const revealEls = $$(".reveal");
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("show");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => obs.observe(el));
+
+    // Counter animation
+    function animateCounters() {
+      const counters = $$("[data-count]");
+      const seen = new Set();
+      const counterObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (seen.has(el)) return;
+          seen.add(el);
+
+          const target = Number(el.getAttribute("data-count"));
+          const suffix = el.getAttribute("data-suffix") || "";
+          const duration = 900;
+          const start = performance.now();
+
+          function tick(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const val = Math.floor(target * (0.2 + 0.8 * p));
+            el.textContent = val.toLocaleString() + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = target.toLocaleString() + suffix;
+          }
+          requestAnimationFrame(tick);
+          counterObs.unobserve(el);
+        });
+      }, { threshold: 0.4 });
+
+      counters.forEach(c => counterObs.observe(c));
+    }
+    animateCounters();
+
+    // Modal
+    const modal = $("#modal");
+    const modalBackdrop = $("#modalBackdrop");
+    const modalClose = $("#modalClose");
+    const modalTitle = $("#modalTitle");
+    const modalBody = $("#modalBody");
+    const modalFooter = $("#modalFooter");
+
+    function openModal({ title, bodyHTML, footerButtons = [] }) {
+      modalTitle.textContent = title;
+      modalBody.innerHTML = bodyHTML;
+      modalFooter.innerHTML = "";
+      footerButtons.forEach(btn => {
+        const b = document.createElement("button");
+        b.className = btn.className;
+        b.textContent = btn.label;
+        b.addEventListener("click", btn.onClick);
+        modalFooter.appendChild(b);
+      });
+      modal.classList.remove("modal-hidden");
+      lucide.createIcons();
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal() {
+      modal.classList.add("modal-hidden");
+      document.body.style.overflow = "";
+    }
+    modalBackdrop.addEventListener("click", closeModal);
+    modalClose.addEventListener("click", closeModal);
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    function demoNotice(title) {
+      openModal({
+        title,
+        bodyHTML: `<p class="text-gray-300">This is a placeholder. Hook this up to a real page or form endpoint when you’re ready.</p>`,
+        footerButtons: [{ label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal }]
+      });
+    }
+
+    // Programs
+    const programDetails = {
+      "Fix & Flip": {
+        title: "Fix & Flip Program",
+        body: `
+          <p class="text-gray-300">Fast acquisition + rehab capital with interest-only payments.</p>
+          <ul class="mt-4 space-y-2 text-gray-300">
+            <li>• Up to 90% LTC (deal dependent)</li>
+            <li>• 12–24 month terms</li>
+            <li>• Rehab draws available</li>
+            <li>• Built for speed</li>
+          </ul>`
+      },
+      "Ground Up": {
+        title: "Ground Up Construction",
+        body: `
+          <p class="text-gray-300">Construction funding with managed draws and milestone reviews.</p>
+          <ul class="mt-4 space-y-2 text-gray-300">
+            <li>• 12–18 month terms</li>
+            <li>• Draw schedule support</li>
+            <li>• Builder + investor friendly</li>
+          </ul>`
+      },
+      "DSCR Rental": {
+        title: "DSCR Rental",
+        body: `
+          <p class="text-gray-300">Rental financing based on property cash flow.</p>
+          <ul class="mt-4 space-y-2 text-gray-300">
+            <li>• 30-year options</li>
+            <li>• No income verification (typical)</li>
+            <li>• Portfolio-friendly</li>
+          </ul>`
+      },
+      "Bridge": {
+        title: "Bridge Loans",
+        body: `
+          <p class="text-gray-300">Short-term capital for acquisitions and timing gaps.</p>
+          <ul class="mt-4 space-y-2 text-gray-300">
+            <li>• 6–36 month terms</li>
+            <li>• Fast closings</li>
+            <li>• Flexible exits</li>
+          </ul>`
+      }
+    };
+
+    $$("[data-program]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const name = btn.getAttribute("data-program");
+        const info = programDetails[name] || { title: name, body: "<p class='text-gray-300'>Details coming soon.</p>" };
+        openModal({
+          title: info.title,
+          bodyHTML: info.body,
+          footerButtons: [
+            { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+            { label: "Get Pre-Approved", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal({ type: name }); } }
+          ]
+        });
+      });
+    });
+
+    // Application modal
+    function openApplicationModal(prefill = {}) {
+      openModal({
+        title: "Get Pre-Approved",
+        bodyHTML: `
+          <p class="text-gray-300 mb-4">Fill this out and we’ll respond with terms fast (demo form).</p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="text-sm text-gray-400">Name</label>
+              <input id="appName" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Your name">
+            </div>
+            <div>
+              <label class="text-sm text-gray-400">Email</label>
+              <input id="appEmail" type="email" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="you@email.com">
+            </div>
+            <div>
+              <label class="text-sm text-gray-400">Loan Type</label>
+              <input id="appType" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Fix & Flip / DSCR / Bridge">
+            </div>
+            <div>
+              <label class="text-sm text-gray-400">Target Close (days)</label>
+              <input id="appClose" type="number" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="2">
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="text-sm text-gray-400">Property Address</label>
+            <input id="appAddress" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="123 Main St, City, ST">
+          </div>
+          <div class="mt-4">
+            <label class="text-sm text-gray-400">Notes</label>
+            <textarea id="appNotes" rows="4" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Tell us about the deal..."></textarea>
+          </div>
+          <p class="text-xs text-gray-500 mt-3">Demo: connect to Formspree/Calendly/CRM later.</p>
+        `,
+        footerButtons: [
+          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+          { label: "Submit (Demo)", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { alert("Submitted! (Demo)"); closeModal(); } }
+        ]
+      });
+      if (prefill.type) $("#appType").value = prefill.type;
+    }
+
+    // Primary buttons
+    $("#btnPreapprove").addEventListener("click", () => openApplicationModal());
+    $("#btnPreapproveMobile").addEventListener("click", () => openApplicationModal());
+    $("#btnStartApp").addEventListener("click", () => openApplicationModal());
+
+    $("#btnHowItWorks").addEventListener("click", () => {
+      openModal({
+        title: "How It Works",
+        bodyHTML: `
+          <ol class="space-y-3 text-gray-300">
+            <li class="flex gap-3"><span class="text-ridge-gold font-bold">1.</span> Submit deal basics (2 minutes).</li>
+            <li class="flex gap-3"><span class="text-ridge-gold font-bold">2.</span> Underwrite + issue terms.</li>
+            <li class="flex gap-3"><span class="text-ridge-gold font-bold">3.</span> Clear conditions & schedule closing.</li>
+            <li class="flex gap-3"><span class="text-ridge-gold font-bold">4.</span> Fund in 24–48 hours when ready.</li>
+          </ol>
+          <div class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
+            <div class="text-sm text-gray-400">Pro tip</div>
+            <div class="font-semibold">Have contract + scope ready to move faster.</div>
+          </div>
+        `,
+        footerButtons: [
+          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+          { label: "Start Application", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal(); } }
+        ]
+      });
+    });
+
+    // Quote modal
+    const propertyValue = $("#propertyValue");
+    const propertyValueDisplay = $("#propertyValueDisplay");
+    const loanAmount = $("#loanAmount");
+    const loanAmountDisplay = $("#loanAmountDisplay");
+    const estimatedRate = $("#estimatedRate");
+    const monthlyPayment = $("#monthlyPayment");
+
+    function formatCurrency(value) {
+      const v = Number(value);
+      if (v >= 1000000) return "$" + (v / 1000000).toFixed(1) + "M";
+      if (v >= 1000) return "$" + (v / 1000).toFixed(0) + "k";
+      return "$" + v.toLocaleString();
+    }
+
+    function calculateLoan() {
+      const pv = parseInt(propertyValue.value, 10);
+      const la = parseInt(loanAmount.value, 10);
+      if (!pv || !la) return;
+      const ltv = (la / pv) * 100;
+      let rate = 10.99;
+      if (ltv <= 60) rate = 9.99;
+      else if (ltv <= 70) rate = 10.49;
+      else if (ltv <= 80) rate = 10.99;
+      else rate = 11.49;
+
+      estimatedRate.textContent = rate.toFixed(2) + "%";
+      const monthly = (la * (rate / 100)) / 12;
+      monthlyPayment.textContent = "$" + monthly.toLocaleString("en-US", { maximumFractionDigits: 0 });
+    }
+
+    propertyValue.addEventListener("input", (e) => { propertyValueDisplay.textContent = formatCurrency(e.target.value); calculateLoan(); });
+    loanAmount.addEventListener("input", (e) => { loanAmountDisplay.textContent = formatCurrency(e.target.value); calculateLoan(); });
+
+    $("#btnFullQuote").addEventListener("click", () => {
+      openModal({
+        title: "Your Quote (Demo)",
+        bodyHTML: `
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-sm text-gray-400">Property Value</div>
+              <div class="text-xl font-bold">${formatCurrency(propertyValue.value)}</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-sm text-gray-400">Loan Amount</div>
+              <div class="text-xl font-bold">${formatCurrency(loanAmount.value)}</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-sm text-gray-400">Estimated Rate</div>
+              <div class="text-xl font-bold text-ridge-gold">${estimatedRate.textContent}</div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-sm text-gray-400">Interest-Only Payment</div>
+              <div class="text-xl font-bold">${monthlyPayment.textContent}/mo</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 mt-4">Submit the application for final terms.</p>
+        `,
+        footerButtons: [
+          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+          { label: "Get Pre-Approved", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal(); } }
+        ]
+      });
+    });
+
+    // Deal analyzer
+    const calcPurchase = $("#calcPurchase");
+    const calcRehab = $("#calcRehab");
+    const calcARV = $("#calcARV");
+    const calcHold = $("#calcHold");
+    const resultLoan = $("#resultLoan");
+    const resultDown = $("#resultDown");
+    const resultInterest = $("#resultInterest");
+    const resultFees = $("#resultFees");
+    const resultSelling = $("#resultSelling");
+    const resultProfit = $("#resultProfit");
+    const resultROI = $("#resultROI");
+
+    function calculateDeal() {
+      const purchase = parseInt(calcPurchase.value, 10) || 0;
+      const rehab = parseInt(calcRehab.value, 10) || 0;
+      const arv = parseInt(calcARV.value, 10) || 0;
+      const hold = parseInt(calcHold.value, 10) || 0;
+
+      const totalCost = purchase + rehab;
+      const la = totalCost * 0.9;
+      const down = totalCost - la;
+
+      const interestRate = 0.1099;
+      const monthlyInterest = (la * interestRate) / 12;
+      const totalInterest = monthlyInterest * hold;
+
+      const points = la * 0.02;
+      const selling = arv * 0.06;
+
+      const netProfit = arv - la - down - totalInterest - points - selling;
+      const cashInvested = down + totalInterest + points;
+      const roi = cashInvested > 0 ? (netProfit / cashInvested) * 100 : 0;
+
+      resultLoan.textContent = "$" + la.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      resultDown.textContent = "$" + down.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      resultInterest.textContent = "$" + totalInterest.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      resultFees.textContent = "$" + points.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      resultSelling.textContent = "$" + selling.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      resultProfit.textContent = "$" + netProfit.toLocaleString(undefined, { maximumFractionDigits: 0 });
+      resultROI.textContent = roi.toFixed(0) + "%";
+
+      if (netProfit < 0) {
+        resultProfit.classList.remove("text-ridge-gold");
+        resultProfit.classList.add("text-red-400");
+      } else {
+        resultProfit.classList.remove("text-red-400");
+        resultProfit.classList.add("text-ridge-gold");
+      }
+    }
+    [calcPurchase, calcRehab, calcARV, calcHold].forEach(i => i.addEventListener("input", calculateDeal));
+
+    $("#btnEmailResults").addEventListener("click", () => {
+      openModal({
+        title: "Email Results (Demo)",
+        bodyHTML: `
+          <p class="text-gray-300 mb-4">Enter your email and we’ll send the deal snapshot (demo).</p>
+          <input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-ridge-gold" placeholder="you@email.com">
+          <div class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300">
+            <div class="flex justify-between"><span>Net Profit</span><span class="font-mono">${resultProfit.textContent}</span></div>
+            <div class="flex justify-between mt-1"><span>ROI</span><span class="font-mono">${resultROI.textContent}</span></div>
+          </div>
+        `,
+        footerButtons: [
+          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+          { label: "Send (Demo)", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { alert("Sent! (Demo)"); closeModal(); } }
+        ]
+      });
+    });
+
+    // Inline lead capture (demo)
+    $("#btnInlineSubmit").addEventListener("click", () => {
+      const email = $("#inlineEmail").value.trim();
+      if (!email) { alert("Enter an email first."); return; }
+      alert("Submitted! (Demo)");
+      $("#inlineEmail").value = "";
+    });
+
+    // CTA buttons
+    $("#btnApplyNow")?.addEventListener("click", () => openApplicationModal());
+    $("#btnScheduleCall")?.addEventListener("click", () => demoNotice("Schedule a Call"));
+
+    // Footer buttons
+    $("#btnPrivacy").addEventListener("click", () => demoNotice("Privacy Policy"));
+    $("#btnTerms").addEventListener("click", () => demoNotice("Terms of Service"));
+    $("#btnNMLS").addEventListener("click", () => demoNotice("NMLS Information"));
+    $("#btnContact").addEventListener("click", () => demoNotice("Contact"));
+    $$("[data-social]").forEach(b => b.addEventListener("click", () => demoNotice(b.getAttribute("data-social"))));
+
+    // FAQ accordion
+    $$(".faq").forEach(card => {
+      card.addEventListener("click", () => {
+        const body = card.querySelector(".faq-body");
+        const all = $$(".faq-body");
+        all.forEach(x => { if (x !== body) x.classList.add("hidden"); });
+        body.classList.toggle("hidden");
         lucide.createIcons();
+      });
+    });
 
-        // Calculator Logic
-        const propertyValue = document.getElementById('propertyValue');
-        const propertyValueDisplay = document.getElementById('propertyValueDisplay');
-        const loanAmount = document.getElementById('loanAmount');
-        const loanAmountDisplay = document.getElementById('loanAmountDisplay');
-        const estimatedRate = document.getElementById('estimatedRate');
-        const monthlyPayment = document.getElementById('monthlyPayment');
-
-        function formatCurrency(value) {
-            if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M';
-            if (value >= 1000) return '$' + (value / 1000).toFixed(0) + 'k';
-            return '$' + value;
-        }
-
-        function calculateLoan() {
-            const pv = parseInt(propertyValue.value);
-            const la = parseInt(loanAmount.value);
-            const ltv = (la / pv) * 100;
-
-            // Rate based on LTV
-            let rate = 10.99;
-            if (ltv <= 60) rate = 9.99;
-            else if (ltv <= 70) rate = 10.49;
-            else if (ltv <= 80) rate = 10.99;
-            else rate = 11.49;
-
-            estimatedRate.textContent = rate.toFixed(2) + '%';
-
-            // Monthly interest-only payment
-            const monthly = (la * (rate / 100)) / 12;
-            monthlyPayment.textContent = '$' + monthly.toLocaleString('en-US', {maximumFractionDigits: 0});
-        }
-
-        propertyValue.addEventListener('input', (e) => {
-            propertyValueDisplay.textContent = formatCurrency(e.target.value);
-            calculateLoan();
-        });
-
-        loanAmount.addEventListener('input', (e) => {
-            loanAmountDisplay.textContent = formatCurrency(e.target.value);
-            calculateLoan();
-        });
-
-        // Deal Analyzer Logic
-        const calcPurchase = document.getElementById('calcPurchase');
-        const calcRehab = document.getElementById('calcRehab');
-        const calcARV = document.getElementById('calcARV');
-        const calcHold = document.getElementById('calcHold');
-
-        const resultLoan = document.getElementById('resultLoan');
-        const resultDown = document.getElementById('resultDown');
-        const resultInterest = document.getElementById('resultInterest');
-        const resultFees = document.getElementById('resultFees');
-        const resultSelling = document.getElementById('resultSelling');
-        const resultProfit = document.getElementById('resultProfit');
-        const resultROI = document.getElementById('resultROI');
-
-        function calculateDeal() {
-            const purchase = parseInt(calcPurchase.value) || 0;
-            const rehab = parseInt(calcRehab.value) || 0;
-            const arv = parseInt(calcARV.value) || 0;
-            const hold = parseInt(calcHold.value) || 0;
-
-            const totalCost = purchase + rehab;
-            const loanAmount = totalCost * 0.9; // 90% LTC
-            const downPayment = totalCost - loanAmount;
-            const interestRate = 0.1099; // 10.99%
-            const monthlyInterest = (loanAmount * interestRate) / 12;
-            const totalInterest = monthlyInterest * hold;
-            const points = loanAmount * 0.02; // 2 points
-            const sellingCosts = arv * 0.06; // 6% selling costs
-
-            const netProfit = arv - loanAmount - downPayment - totalInterest - points - sellingCosts;
-            const cashInvested = downPayment + totalInterest + points;
-            const roi = cashInvested > 0 ? ((netProfit / cashInvested) * 100) : 0;
-
-            resultLoan.textContent = '$' + loanAmount.toLocaleString();
-            resultDown.textContent = '$' + downPayment.toLocaleString();
-            resultInterest.textContent = '$' + totalInterest.toLocaleString(undefined, {maximumFractionDigits: 0});
-            resultFees.textContent = '$' + points.toLocaleString(undefined, {maximumFractionDigits: 0});
-            resultSelling.textContent = '$' + sellingCosts.toLocaleString(undefined, {maximumFractionDigits: 0});
-            resultProfit.textContent = '$' + netProfit.toLocaleString(undefined, {maximumFractionDigits: 0});
-            resultROI.textContent = roi.toFixed(0) + '%';
-
-            // Color coding
-            if (netProfit < 0) {
-                resultProfit.classList.remove('text-ridge-gold');
-                resultProfit.classList.add('text-red-400');
-            } else {
-                resultProfit.classList.remove('text-red-400');
-                resultProfit.classList.add('text-ridge-gold');
-            }
-        }
-
-        [calcPurchase, calcRehab, calcARV, calcHold].forEach(input => {
-            input.addEventListener('input', calculateDeal);
-        });
-
-        // Initialize calculations
-        calculateLoan();
-        calculateDeal();
-    </script>
+    // Init
+    propertyValueDisplay.textContent = formatCurrency(propertyValue.value);
+    loanAmountDisplay.textContent = formatCurrency(loanAmount.value);
+    calculateLoan();
+    calculateDeal();
+  </script>
 </body>
 </html>
