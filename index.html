@@ -39,9 +39,12 @@
       background: linear-gradient(135deg,#d4af37 0%,#f4e4a6 50%,#d4af37 100%);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
     }
-    .hero-gradient{ background: radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,0.20), transparent 60%),
-                               radial-gradient(900px 500px at 85% 30%, rgba(59,130,246,0.18), transparent 55%),
-                               linear-gradient(135deg,#0f172a 0%,#1e293b 55%,#0f172a 100%); }
+    .hero-gradient{
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,0.20), transparent 60%),
+        radial-gradient(900px 500px at 85% 30%, rgba(59,130,246,0.18), transparent 55%),
+        linear-gradient(135deg,#0f172a 0%,#1e293b 55%,#0f172a 100%);
+    }
     .glass{ background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.10); }
     .card-hover{ transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
     .card-hover:hover{ transform: translateY(-8px); border-color: rgba(212,175,55,0.35); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
@@ -78,9 +81,7 @@
     .modal-backdrop{ background: rgba(0,0,0,.62); }
 
     /* Gradient border ring */
-    .ring-gold{
-      position: relative;
-    }
+    .ring-gold{ position: relative; }
     .ring-gold:before{
       content:"";
       position:absolute; inset:-1px;
@@ -630,10 +631,11 @@
     </div>
   </footer>
 
-  <!-- MODAL -->
+  <!-- MODAL (FIXED Z-INDEX LAYERS) -->
   <div id="modal" class="modal-hidden fixed inset-0 z-[999] flex items-center justify-center p-4">
-    <div id="modalBackdrop" class="absolute inset-0 modal-backdrop"></div>
-    <div class="relative w-full max-w-2xl glass rounded-2xl border border-white/10 overflow-hidden">
+    <div id="modalBackdrop" class="absolute inset-0 modal-backdrop z-0"></div>
+
+    <div class="relative z-10 w-full max-w-2xl glass rounded-2xl border border-white/10 overflow-hidden">
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
         <h3 id="modalTitle" class="text-xl font-bold">Modal</h3>
         <button id="modalClose" class="w-10 h-10 rounded-lg hover:bg-white/5 flex items-center justify-center" aria-label="Close">
@@ -749,6 +751,8 @@
     }
     function closeModal() {
       modal.classList.add("modal-hidden");
+      modalBody.innerHTML = "";
+      modalFooter.innerHTML = "";
       document.body.style.overflow = "";
     }
     modalBackdrop.addEventListener("click", closeModal);
@@ -892,7 +896,7 @@
       });
     });
 
-    // Quote modal
+    // Quote logic
     const propertyValue = $("#propertyValue");
     const propertyValueDisplay = $("#propertyValueDisplay");
     const loanAmount = $("#loanAmount");
@@ -911,6 +915,7 @@
       const pv = parseInt(propertyValue.value, 10);
       const la = parseInt(loanAmount.value, 10);
       if (!pv || !la) return;
+
       const ltv = (la / pv) * 100;
       let rate = 10.99;
       if (ltv <= 60) rate = 9.99;
@@ -1027,7 +1032,7 @@
       });
     });
 
-    // Inline lead capture (demo)
+    // Inline lead capture
     $("#btnInlineSubmit").addEventListener("click", () => {
       const email = $("#inlineEmail").value.trim();
       if (!email) { alert("Enter an email first."); return; }
