@@ -77,7 +77,6 @@
     .reveal.show{ opacity:1; transform: translateY(0); }
 
     /* Modal */
-    .modal-hidden{ display:none; }
     .modal-backdrop{ background: rgba(0,0,0,.62); }
 
     /* Gradient border ring */
@@ -97,10 +96,71 @@
       border-bottom: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(10px);
     }
+
+    /* ===== Premium spice pack ===== */
+    #scrollProgress{
+      position:fixed; top:0; left:0;
+      height:3px; width:0%;
+      z-index:9999;
+      background: linear-gradient(90deg, rgba(212,175,55,.9), rgba(244,228,166,.7), rgba(59,130,246,.45));
+      box-shadow: 0 10px 30px rgba(212,175,55,.20);
+    }
+    #spotlight{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:1;
+      background: radial-gradient(500px 500px at var(--mx, 20%) var(--my, 20%),
+        rgba(212,175,55,.18),
+        rgba(59,130,246,.10) 35%,
+        transparent 70%);
+      mix-blend-mode: screen;
+      opacity:.9;
+    }
+    body > *{ position: relative; z-index:2; }
+
+    .premium-hover{ position: relative; overflow: hidden; }
+    .premium-hover:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg,
+        rgba(212,175,55,.35),
+        rgba(244,228,166,.12),
+        rgba(59,130,246,.18),
+        rgba(212,175,55,.30));
+      opacity:0;
+      transition: opacity .35s ease;
+      z-index:0;
+    }
+    .premium-hover > *{ position: relative; z-index:1; }
+    .premium-hover:hover:before{ opacity:1; }
+
+    .ripple{ position: relative; overflow: hidden; }
+    .ripple span.ripple-ink{
+      position:absolute;
+      border-radius:999px;
+      transform:scale(0);
+      animation:ripple .6s ease-out;
+      background: rgba(255,255,255,.35);
+      pointer-events:none;
+    }
+    @keyframes ripple{ to{ transform:scale(3.2); opacity:0; } }
+
+    #stickyCta{
+      position:fixed;
+      bottom:18px; left:50%;
+      transform:translateX(-50%);
+      z-index:9998;
+      display:none;
+    }
+    #stickyCta.show{ display:block; }
   </style>
 </head>
 
 <body class="bg-ridge-900 text-white font-sans antialiased">
+
+  <!-- Spice overlays -->
+  <div id="scrollProgress"></div>
+  <div id="spotlight" aria-hidden="true"></div>
 
   <!-- NAV -->
   <nav id="nav" class="fixed w-full z-50 transition">
@@ -117,12 +177,13 @@
 
         <div class="hidden md:flex items-center space-x-8">
           <button data-scroll="#products" class="text-gray-300 hover:text-ridge-gold transition">Loan Products</button>
+          <button data-scroll="#proof" class="text-gray-300 hover:text-ridge-gold transition">Proof</button>
           <button data-scroll="#calculator" class="text-gray-300 hover:text-ridge-gold transition">Deal Calculator</button>
           <button data-scroll="#process" class="text-gray-300 hover:text-ridge-gold transition">Process</button>
           <button data-scroll="#faq" class="text-gray-300 hover:text-ridge-gold transition">FAQ</button>
 
           <button id="btnPreapprove"
-                  class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-6 py-2 rounded-full font-semibold hover:bg-ridge-goldLight transition transform hover:scale-[1.02]">
+                  class="btn-press btn-shine ripple bg-ridge-gold text-ridge-900 px-6 py-2 rounded-full font-semibold hover:bg-ridge-goldLight transition transform hover:scale-[1.02]">
             Get Pre-Approved
           </button>
         </div>
@@ -136,10 +197,11 @@
       <div id="mobileMenu" class="md:hidden hidden pb-4">
         <div class="glass rounded-2xl p-4 space-y-2">
           <button data-scroll="#products" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Loan Products</button>
+          <button data-scroll="#proof" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Proof</button>
           <button data-scroll="#calculator" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Deal Calculator</button>
           <button data-scroll="#process" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">Process</button>
           <button data-scroll="#faq" class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5">FAQ</button>
-          <button id="btnPreapproveMobile" class="w-full btn-press btn-shine bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+          <button id="btnPreapproveMobile" class="w-full btn-press btn-shine ripple bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
             Get Pre-Approved
           </button>
         </div>
@@ -171,27 +233,27 @@
 
           <div class="flex flex-col sm:flex-row gap-4">
             <button id="btnStartApp"
-                    class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition shadow-gold">
+                    class="btn-press btn-shine ripple bg-ridge-gold text-ridge-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition shadow-gold">
               Start Your Application
             </button>
 
             <button id="btnHowItWorks"
-                    class="btn-press border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/5 transition flex items-center justify-center space-x-2">
+                    class="btn-press ripple border-2 border-white/20 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/5 transition flex items-center justify-center space-x-2">
               <i data-lucide="play-circle" class="w-5 h-5"></i>
               <span>See How It Works</span>
             </button>
           </div>
 
           <div class="grid grid-cols-3 gap-6 pt-4">
-            <div class="glass rounded-2xl p-4 border border-white/10">
+            <div class="glass rounded-2xl p-4 border border-white/10 premium-hover">
               <div class="text-3xl font-bold text-ridge-gold"><span data-count="500" data-suffix="M+">0</span></div>
               <div class="text-sm text-gray-400">Loans Funded</div>
             </div>
-            <div class="glass rounded-2xl p-4 border border-white/10">
+            <div class="glass rounded-2xl p-4 border border-white/10 premium-hover">
               <div class="text-3xl font-bold text-ridge-gold"><span data-count="24" data-suffix="hrs">0</span></div>
               <div class="text-sm text-gray-400">Avg Close</div>
             </div>
-            <div class="glass rounded-2xl p-4 border border-white/10">
+            <div class="glass rounded-2xl p-4 border border-white/10 premium-hover">
               <div class="text-3xl font-bold text-ridge-gold"><span data-count="98" data-suffix="%">0</span></div>
               <div class="text-sm text-gray-400">Repeat Clients</div>
             </div>
@@ -201,7 +263,7 @@
         <!-- Quote Card -->
         <div class="relative reveal" style="transition-delay:.1s;">
           <div class="ring-gold rounded-2xl">
-            <div class="glass rounded-2xl p-8 shadow-gold">
+            <div class="glass rounded-2xl p-8 shadow-gold premium-hover">
               <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-semibold">Quick Rate Quote</h3>
                 <span class="text-ridge-gold text-sm">No credit check</span>
@@ -255,7 +317,7 @@
                   </div>
                 </div>
 
-                <button id="btnFullQuote" class="w-full btn-press btn-shine bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+                <button id="btnFullQuote" class="w-full btn-press btn-shine ripple bg-ridge-gold text-ridge-900 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
                   Get Full Quote
                 </button>
 
@@ -295,7 +357,7 @@
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal">
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal premium-hover">
           <div class="w-12 h-12 bg-ridge-gold/20 rounded-xl flex items-center justify-center mb-4">
             <i data-lucide="home" class="text-ridge-gold w-6 h-6"></i>
           </div>
@@ -306,11 +368,11 @@
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> 12–24 month terms</li>
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-ridge-gold mr-2"></i> Interest-only payments</li>
           </ul>
-          <button class="w-full btn-press border border-ridge-gold/45 text-ridge-gold py-2 rounded-lg hover:bg-ridge-gold hover:text-ridge-900 transition"
+          <button class="w-full btn-press ripple border border-ridge-gold/45 text-ridge-gold py-2 rounded-lg hover:bg-ridge-gold hover:text-ridge-900 transition"
                   data-program="Fix & Flip">Learn More</button>
         </div>
 
-        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal" style="transition-delay:.05s;">
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal premium-hover" style="transition-delay:.05s;">
           <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
             <i data-lucide="building-2" class="text-blue-400 w-6 h-6"></i>
           </div>
@@ -321,11 +383,11 @@
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> 12–18 month terms</li>
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-blue-400 mr-2"></i> Builder-friendly draws</li>
           </ul>
-          <button class="w-full btn-press border border-blue-400/45 text-blue-400 py-2 rounded-lg hover:bg-blue-400 hover:text-ridge-900 transition"
+          <button class="w-full btn-press ripple border border-blue-400/45 text-blue-400 py-2 rounded-lg hover:bg-blue-400 hover:text-ridge-900 transition"
                   data-program="Ground Up">Learn More</button>
         </div>
 
-        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal" style="transition-delay:.10s;">
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal premium-hover" style="transition-delay:.10s;">
           <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
             <i data-lucide="trending-up" class="text-green-400 w-6 h-6"></i>
           </div>
@@ -336,11 +398,11 @@
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> No income verification</li>
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-green-400 mr-2"></i> Portfolio-friendly</li>
           </ul>
-          <button class="w-full btn-press border border-green-400/45 text-green-400 py-2 rounded-lg hover:bg-green-400 hover:text-ridge-900 transition"
+          <button class="w-full btn-press ripple border border-green-400/45 text-green-400 py-2 rounded-lg hover:bg-green-400 hover:text-ridge-900 transition"
                   data-program="DSCR Rental">Learn More</button>
         </div>
 
-        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal" style="transition-delay:.15s;">
+        <div class="glass rounded-2xl p-6 card-hover border border-white/5 reveal premium-hover" style="transition-delay:.15s;">
           <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
             <i data-lucide="zap" class="text-purple-400 w-6 h-6"></i>
           </div>
@@ -351,9 +413,99 @@
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> 6–36 month terms</li>
             <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-purple-400 mr-2"></i> Close in 48 hours</li>
           </ul>
-          <button class="w-full btn-press border border-purple-400/45 text-purple-400 py-2 rounded-lg hover:bg-purple-400 hover:text-ridge-900 transition"
+          <button class="w-full btn-press ripple border border-purple-400/45 text-purple-400 py-2 rounded-lg hover:bg-purple-400 hover:text-ridge-900 transition"
                   data-program="Bridge">Learn More</button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof / Case Studies -->
+  <section id="proof" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 reveal">
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-4">Proof investors trust us</h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+          Not fluff. Clear process, fast terms, and execution that closes.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="glass rounded-2xl p-7 border border-white/10 card-hover premium-hover reveal">
+          <div class="flex items-center justify-between mb-4">
+            <div class="text-sm text-gray-400">Case Study</div>
+            <span class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-ridge-gold">48hr Close</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Fix & Flip — $315k</h3>
+          <p class="text-gray-400 text-sm mb-5">
+            Terms issued same day. Clean conditions. Closed inside 48 hours once title cleared.
+          </p>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-gray-400 text-xs">LTC</div>
+              <div class="font-mono font-bold">90%</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-gray-400 text-xs">Rate</div>
+              <div class="font-mono font-bold">10.49%</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-gray-400 text-xs">Term</div>
+              <div class="font-mono font-bold">12 mo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl p-7 border border-white/10 card-hover premium-hover reveal" style="transition-delay:.05s;">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+              <i data-lucide="user" class="w-5 h-5 text-ridge-gold"></i>
+            </div>
+            <div>
+              <div class="font-semibold">Repeat Investor</div>
+              <div class="text-xs text-gray-400">Midwest • Fix & Flip</div>
+            </div>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            “Everything was exactly what they said it would be. No surprises, no delays.
+            The team moved like pros and the term sheet was clean.”
+          </p>
+          <div class="mt-5 flex items-center gap-1 text-ridge-gold">
+            <i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i><i data-lucide="star" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl p-7 border border-white/10 card-hover premium-hover reveal" style="transition-delay:.10s;">
+          <div class="flex items-center justify-between mb-4">
+            <div class="text-sm text-gray-400">Case Study</div>
+            <span class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-blue-300">Draws Managed</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Ground Up — 6 draws</h3>
+          <p class="text-gray-400 text-sm mb-5">
+            Milestone-based draws with clear inspections and faster releases to keep the build moving.
+          </p>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-gray-400 text-xs">Term</div>
+              <div class="font-mono font-bold">18 mo</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-gray-400 text-xs">Draws</div>
+              <div class="font-mono font-bold">6</div>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-gray-400 text-xs">Close</div>
+              <div class="font-mono font-bold">72hr</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center reveal">
+        <button type="button" data-scroll="#calculator"
+          class="btn-press btn-shine ripple bg-white/5 border border-white/10 hover:border-ridge-gold/40 px-7 py-3 rounded-full font-semibold hover:text-ridge-gold transition">
+          Run a Deal in the Analyzer
+        </button>
       </div>
     </div>
   </section>
@@ -368,7 +520,7 @@
             Know your numbers before you offer. We calculate loan size, interest, fees, and exit costs to show true net profit.
           </p>
           <div class="grid sm:grid-cols-2 gap-4">
-            <div class="glass rounded-2xl p-5 border border-white/10">
+            <div class="glass rounded-2xl p-5 border border-white/10 premium-hover">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-ridge-gold/15 flex items-center justify-center">
                   <i data-lucide="sparkles" class="w-5 h-5 text-ridge-gold"></i>
@@ -379,7 +531,7 @@
                 </div>
               </div>
             </div>
-            <div class="glass rounded-2xl p-5 border border-white/10">
+            <div class="glass rounded-2xl p-5 border border-white/10 premium-hover">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center">
                   <i data-lucide="shield" class="w-5 h-5 text-blue-400"></i>
@@ -393,7 +545,7 @@
           </div>
         </div>
 
-        <div class="glass rounded-2xl p-8 border border-ridge-gold/20 reveal" style="transition-delay:.05s;">
+        <div class="glass rounded-2xl p-8 border border-ridge-gold/20 reveal premium-hover" style="transition-delay:.05s;">
           <h3 class="text-2xl font-bold mb-6 flex items-center">
             <i data-lucide="calculator" class="text-ridge-gold mr-3"></i>
             Fix & Flip Calculator
@@ -436,7 +588,7 @@
                 <span class="text-lg font-bold text-green-400" id="resultROI">141%</span>
               </div>
 
-              <button id="btnEmailResults" class="btn-press w-full mt-4 border border-white/20 hover:border-ridge-gold/60 hover:text-ridge-gold transition rounded-lg py-3 font-semibold">
+              <button id="btnEmailResults" class="btn-press ripple w-full mt-4 border border-white/20 hover:border-ridge-gold/60 hover:text-ridge-gold transition rounded-lg py-3 font-semibold">
                 Email Me These Results
               </button>
             </div>
@@ -456,7 +608,7 @@
       </div>
 
       <div class="grid lg:grid-cols-4 gap-6">
-        <div class="glass rounded-2xl p-6 border border-white/10 reveal">
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal premium-hover">
           <div class="w-12 h-12 rounded-xl bg-ridge-gold/15 flex items-center justify-center mb-4">
             <i data-lucide="clipboard-check" class="w-6 h-6 text-ridge-gold"></i>
           </div>
@@ -464,7 +616,7 @@
           <p class="text-gray-400 text-sm">Address, numbers, exit plan. Takes 2 minutes.</p>
         </div>
 
-        <div class="glass rounded-2xl p-6 border border-white/10 reveal" style="transition-delay:.05s;">
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal premium-hover" style="transition-delay:.05s;">
           <div class="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center mb-4">
             <i data-lucide="scan-eye" class="w-6 h-6 text-blue-400"></i>
           </div>
@@ -472,7 +624,7 @@
           <p class="text-gray-400 text-sm">We review comps and scope. Term sheet in hours.</p>
         </div>
 
-        <div class="glass rounded-2xl p-6 border border-white/10 reveal" style="transition-delay:.10s;">
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal premium-hover" style="transition-delay:.10s;">
           <div class="w-12 h-12 rounded-xl bg-green-500/15 flex items-center justify-center mb-4">
             <i data-lucide="file-check" class="w-6 h-6 text-green-400"></i>
           </div>
@@ -480,7 +632,7 @@
           <p class="text-gray-400 text-sm">Simple checklist. Dedicated closer on your file.</p>
         </div>
 
-        <div class="glass rounded-2xl p-6 border border-white/10 reveal" style="transition-delay:.15s;">
+        <div class="glass rounded-2xl p-6 border border-white/10 reveal premium-hover" style="transition-delay:.15s;">
           <div class="w-12 h-12 rounded-xl bg-purple-500/15 flex items-center justify-center mb-4">
             <i data-lucide="zap" class="w-6 h-6 text-purple-400"></i>
           </div>
@@ -490,7 +642,7 @@
       </div>
 
       <!-- Inline lead capture -->
-      <div class="mt-12 glass rounded-2xl p-8 border border-ridge-gold/20 reveal">
+      <div class="mt-12 glass rounded-2xl p-8 border border-ridge-gold/20 reveal premium-hover">
         <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div>
             <h3 class="text-2xl font-bold">Get a term sheet fast</h3>
@@ -505,7 +657,7 @@
               <option>DSCR Rental</option>
               <option>Bridge</option>
             </select>
-            <button id="btnInlineSubmit" class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-6 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
+            <button id="btnInlineSubmit" class="btn-press btn-shine ripple bg-ridge-gold text-ridge-900 px-6 py-3 rounded-lg font-bold hover:bg-ridge-goldLight transition">
               Get Terms
             </button>
           </div>
@@ -523,7 +675,7 @@
       </div>
 
       <div class="space-y-4">
-        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal">
+        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal premium-hover">
           <div class="flex items-center justify-between">
             <span class="font-semibold">How fast can you close?</span>
             <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
@@ -533,7 +685,7 @@
           </div>
         </button>
 
-        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal" style="transition-delay:.05s;">
+        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal premium-hover" style="transition-delay:.05s;">
           <div class="flex items-center justify-between">
             <span class="font-semibold">Do you check credit?</span>
             <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
@@ -543,7 +695,7 @@
           </div>
         </button>
 
-        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal" style="transition-delay:.10s;">
+        <button class="faq glass w-full text-left p-6 rounded-2xl border border-white/10 reveal premium-hover" style="transition-delay:.10s;">
           <div class="flex items-center justify-between">
             <span class="font-semibold">What documents do you need?</span>
             <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
@@ -564,10 +716,10 @@
       <h2 class="font-serif text-4xl lg:text-6xl font-bold mb-6">Ready to fund<br>your next deal?</h2>
       <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Get a term sheet fast. Clear conditions. Real closers.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button id="btnApplyNow" class="btn-press btn-shine bg-ridge-gold text-ridge-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition shadow-gold">
+        <button id="btnApplyNow" class="btn-press btn-shine ripple bg-ridge-gold text-ridge-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-ridge-goldLight transition shadow-gold">
           Apply Now — It's Free
         </button>
-        <button id="btnScheduleCall" class="btn-press border-2 border-white/30 text-white px-10 py-4 rounded-full font-semibold hover:bg-white/5 transition">
+        <button id="btnScheduleCall" class="btn-press ripple border-2 border-white/30 text-white px-10 py-4 rounded-full font-semibold hover:bg-white/5 transition">
           Schedule a Call
         </button>
       </div>
@@ -588,13 +740,13 @@
           </div>
           <p class="text-gray-400 mb-4 max-w-sm">Private capital for real estate investors. Fast, flexible, and reliable funding nationwide.</p>
           <div class="flex space-x-4">
-            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition" data-social="LinkedIn">
+            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition ripple" data-social="LinkedIn">
               <i data-lucide="linkedin" class="w-5 h-5"></i>
             </button>
-            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition" data-social="Twitter">
+            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition ripple" data-social="Twitter">
               <i data-lucide="twitter" class="w-5 h-5"></i>
             </button>
-            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition" data-social="Instagram">
+            <button class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-ridge-gold hover:text-ridge-900 transition ripple" data-social="Instagram">
               <i data-lucide="instagram" class="w-5 h-5"></i>
             </button>
           </div>
@@ -631,14 +783,14 @@
     </div>
   </footer>
 
-  <!-- MODAL (FIXED Z-INDEX LAYERS) -->
+  <!-- MODAL -->
   <div id="modal" class="hidden fixed inset-0 z-[999] flex items-center justify-center p-4">
     <div id="modalBackdrop" class="absolute inset-0 modal-backdrop z-0"></div>
 
     <div class="relative z-10 w-full max-w-2xl glass rounded-2xl border border-white/10 overflow-hidden">
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
         <h3 id="modalTitle" class="text-xl font-bold">Modal</h3>
-        <button id="modalClose" class="w-10 h-10 rounded-lg hover:bg-white/5 flex items-center justify-center" aria-label="Close">
+        <button id="modalClose" class="w-10 h-10 rounded-lg hover:bg-white/5 flex items-center justify-center ripple" aria-label="Close">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -647,426 +799,530 @@
     </div>
   </div>
 
+  <!-- Sticky CTA -->
+  <div id="stickyCta">
+    <div class="glass border border-white/10 rounded-full px-3 py-2 flex items-center gap-2 shadow-gold">
+      <div class="hidden sm:flex items-center gap-2 text-sm text-gray-300 pl-2">
+        <i data-lucide="zap" class="w-4 h-4 text-ridge-gold"></i>
+        <span>Get terms fast • No credit check quote</span>
+      </div>
+      <button id="btnStickyApply" type="button"
+        class="btn-press btn-shine ripple bg-ridge-gold text-ridge-900 px-5 py-2 rounded-full font-bold hover:bg-ridge-goldLight transition">
+        Get Pre-Approved
+      </button>
+    </div>
+  </div>
+
   <script>
-    lucide.createIcons();
+    document.addEventListener("DOMContentLoaded", () => {
+      // Helpers (prevents one JS error from breaking EVERYTHING)
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
+      const safe = (fn) => { try { fn(); } catch(e) { console.warn(e); } };
+      const on = (el, evt, fn) => { if (el) el.addEventListener(evt, fn); };
 
-    const $ = (s) => document.querySelector(s);
-    const $$ = (s) => Array.from(document.querySelectorAll(s));
+      safe(() => lucide.createIcons());
 
-    // Nav solid on scroll
-    const nav = $("#nav");
-    function setNav() {
-      if (window.scrollY > 10) nav.classList.add("nav-solid");
-      else nav.classList.remove("nav-solid");
-    }
-    window.addEventListener("scroll", setNav);
-    setNav();
+      // Nav solid on scroll
+      const nav = $("#nav");
+      const setNav = () => {
+        if (!nav) return;
+        if (window.scrollY > 10) nav.classList.add("nav-solid");
+        else nav.classList.remove("nav-solid");
+      };
+      window.addEventListener("scroll", setNav, { passive:true });
+      setNav();
 
-    // Mobile menu
-    const btnMobile = $("#btnMobile");
-    const mobileMenu = $("#mobileMenu");
-    btnMobile.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-      lucide.createIcons();
-    });
-
-    // Smooth scroll
-    function scrollToSection(selector) {
-      const el = document.querySelector(selector);
-      if (!el) return;
-      const navHeight = 88;
-      const y = el.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({ top: y, behavior: "smooth" });
-      mobileMenu.classList.add("hidden");
-    }
-    $$("[data-scroll]").forEach(btn => btn.addEventListener("click", () => scrollToSection(btn.getAttribute("data-scroll"))));
-    $("#btnHome").addEventListener("click", () => scrollToSection("#top"));
-
-    // Scroll reveal
-    const revealEls = $$(".reveal");
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("show");
-          obs.unobserve(e.target);
-        }
+      // Mobile menu
+      const btnMobile = $("#btnMobile");
+      const mobileMenu = $("#mobileMenu");
+      on(btnMobile, "click", () => {
+        if (!mobileMenu) return;
+        mobileMenu.classList.toggle("hidden");
+        safe(() => lucide.createIcons());
       });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => obs.observe(el));
 
-    // Counter animation
-    function animateCounters() {
-      const counters = $$("[data-count]");
-      const seen = new Set();
-      const counterObs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          if (seen.has(el)) return;
-          seen.add(el);
+      // Smooth scroll
+      const scrollToSection = (selector) => {
+        const el = document.querySelector(selector);
+        if (!el) return;
+        const navHeight = 88;
+        const y = el.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        if (mobileMenu) mobileMenu.classList.add("hidden");
+      };
+      $$("[data-scroll]").forEach(btn => on(btn, "click", () => scrollToSection(btn.getAttribute("data-scroll"))));
+      on($("#btnHome"), "click", () => scrollToSection("#top"));
 
-          const target = Number(el.getAttribute("data-count"));
-          const suffix = el.getAttribute("data-suffix") || "";
-          const duration = 900;
-          const start = performance.now();
+      // Scroll reveal
+      safe(() => {
+        const revealEls = $$(".reveal");
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add("show");
+              obs.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => obs.observe(el));
+      });
 
-          function tick(now) {
-            const p = Math.min((now - start) / duration, 1);
-            const val = Math.floor(target * (0.2 + 0.8 * p));
-            el.textContent = val.toLocaleString() + suffix;
-            if (p < 1) requestAnimationFrame(tick);
-            else el.textContent = target.toLocaleString() + suffix;
-          }
-          requestAnimationFrame(tick);
-          counterObs.unobserve(el);
+      // Counter animation
+      safe(() => {
+        const counters = $$("[data-count]");
+        const seen = new Set();
+        const counterObs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            if (seen.has(el)) return;
+            seen.add(el);
+
+            const target = Number(el.getAttribute("data-count"));
+            const suffix = el.getAttribute("data-suffix") || "";
+            const duration = 900;
+            const start = performance.now();
+
+            const tick = (now) => {
+              const p = Math.min((now - start) / duration, 1);
+              const val = Math.floor(target * (0.2 + 0.8 * p));
+              el.textContent = val.toLocaleString() + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+              else el.textContent = target.toLocaleString() + suffix;
+            };
+            requestAnimationFrame(tick);
+            counterObs.unobserve(el);
+          });
+        }, { threshold: 0.4 });
+
+        counters.forEach(c => counterObs.observe(c));
+      });
+
+      // Modal
+      const modal = $("#modal");
+      const modalBackdrop = $("#modalBackdrop");
+      const modalClose = $("#modalClose");
+      const modalTitle = $("#modalTitle");
+      const modalBody = $("#modalBody");
+      const modalFooter = $("#modalFooter");
+
+      const openModal = ({ title, bodyHTML, footerButtons = [] }) => {
+        if (!modal) return;
+        modalTitle.textContent = title || "Modal";
+        modalBody.innerHTML = bodyHTML || "";
+        modalFooter.innerHTML = "";
+
+        footerButtons.forEach(btn => {
+          const b = document.createElement("button");
+          b.className = btn.className;
+          b.textContent = btn.label;
+          b.addEventListener("click", btn.onClick);
+          modalFooter.appendChild(b);
         });
-      }, { threshold: 0.4 });
 
-      counters.forEach(c => counterObs.observe(c));
-    }
-    animateCounters();
+        modal.classList.remove("hidden");
+        safe(() => lucide.createIcons());
+        document.body.style.overflow = "hidden";
+      };
 
-    // Modal
-    const modal = $("#modal");
-    const modalBackdrop = $("#modalBackdrop");
-    const modalClose = $("#modalClose");
-    const modalTitle = $("#modalTitle");
-    const modalBody = $("#modalBody");
-    const modalFooter = $("#modalFooter");
+      const closeModal = () => {
+        if (!modal) return;
+        modal.classList.add("hidden");
+        modalBody.innerHTML = "";
+        modalFooter.innerHTML = "";
+        document.body.style.overflow = "";
+      };
 
-    function openModal({ title, bodyHTML, footerButtons = [] }) {
-      modalTitle.textContent = title;
-      modalBody.innerHTML = bodyHTML;
-      modalFooter.innerHTML = "";
-      footerButtons.forEach(btn => {
-        const b = document.createElement("button");
-        b.className = btn.className;
-        b.textContent = btn.label;
-        b.addEventListener("click", btn.onClick);
-        modalFooter.appendChild(b);
-      });
-      modal.classList.remove("hidden");
-      lucide.createIcons();
-      document.body.style.overflow = "hidden";
-    }
-    function closeModal() {
-      modal.classList.add("hidden");
-      modalBody.innerHTML = "";
-      modalFooter.innerHTML = "";
-      document.body.style.overflow = "";
-    }
-    modalBackdrop.addEventListener("click", closeModal);
-    modalClose.addEventListener("click", closeModal);
-    window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+      on(modalBackdrop, "click", closeModal);
+      on(modalClose, "click", closeModal);
+      window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-    function demoNotice(title) {
-      openModal({
-        title,
-        bodyHTML: `<p class="text-gray-300">This is a placeholder. Hook this up to a real page or form endpoint when you’re ready.</p>`,
-        footerButtons: [{ label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal }]
-      });
-    }
-
-    // Programs
-    const programDetails = {
-      "Fix & Flip": {
-        title: "Fix & Flip Program",
-        body: `
-          <p class="text-gray-300">Fast acquisition + rehab capital with interest-only payments.</p>
-          <ul class="mt-4 space-y-2 text-gray-300">
-            <li>• Up to 90% LTC (deal dependent)</li>
-            <li>• 12–24 month terms</li>
-            <li>• Rehab draws available</li>
-            <li>• Built for speed</li>
-          </ul>`
-      },
-      "Ground Up": {
-        title: "Ground Up Construction",
-        body: `
-          <p class="text-gray-300">Construction funding with managed draws and milestone reviews.</p>
-          <ul class="mt-4 space-y-2 text-gray-300">
-            <li>• 12–18 month terms</li>
-            <li>• Draw schedule support</li>
-            <li>• Builder + investor friendly</li>
-          </ul>`
-      },
-      "DSCR Rental": {
-        title: "DSCR Rental",
-        body: `
-          <p class="text-gray-300">Rental financing based on property cash flow.</p>
-          <ul class="mt-4 space-y-2 text-gray-300">
-            <li>• 30-year options</li>
-            <li>• No income verification (typical)</li>
-            <li>• Portfolio-friendly</li>
-          </ul>`
-      },
-      "Bridge": {
-        title: "Bridge Loans",
-        body: `
-          <p class="text-gray-300">Short-term capital for acquisitions and timing gaps.</p>
-          <ul class="mt-4 space-y-2 text-gray-300">
-            <li>• 6–36 month terms</li>
-            <li>• Fast closings</li>
-            <li>• Flexible exits</li>
-          </ul>`
-      }
-    };
-
-    $$("[data-program]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const name = btn.getAttribute("data-program");
-        const info = programDetails[name] || { title: name, body: "<p class='text-gray-300'>Details coming soon.</p>" };
+      const demoNotice = (title) => {
         openModal({
-          title: info.title,
-          bodyHTML: info.body,
+          title,
+          bodyHTML: `<p class="text-gray-300">This is a placeholder. Hook this up to a real page or form endpoint when you’re ready.</p>`,
+          footerButtons: [
+            { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal }
+          ]
+        });
+      };
+
+      // Programs
+      const programDetails = {
+        "Fix & Flip": {
+          title: "Fix & Flip Program",
+          body: `
+            <p class="text-gray-300">Fast acquisition + rehab capital with interest-only payments.</p>
+            <ul class="mt-4 space-y-2 text-gray-300">
+              <li>• Up to 90% LTC (deal dependent)</li>
+              <li>• 12–24 month terms</li>
+              <li>• Rehab draws available</li>
+              <li>• Built for speed</li>
+            </ul>`
+        },
+        "Ground Up": {
+          title: "Ground Up Construction",
+          body: `
+            <p class="text-gray-300">Construction funding with managed draws and milestone reviews.</p>
+            <ul class="mt-4 space-y-2 text-gray-300">
+              <li>• 12–18 month terms</li>
+              <li>• Draw schedule support</li>
+              <li>• Builder + investor friendly</li>
+            </ul>`
+        },
+        "DSCR Rental": {
+          title: "DSCR Rental",
+          body: `
+            <p class="text-gray-300">Rental financing based on property cash flow.</p>
+            <ul class="mt-4 space-y-2 text-gray-300">
+              <li>• 30-year options</li>
+              <li>• No income verification (typical)</li>
+              <li>• Portfolio-friendly</li>
+            </ul>`
+        },
+        "Bridge": {
+          title: "Bridge Loans",
+          body: `
+            <p class="text-gray-300">Short-term capital for acquisitions and timing gaps.</p>
+            <ul class="mt-4 space-y-2 text-gray-300">
+              <li>• 6–36 month terms</li>
+              <li>• Fast closings</li>
+              <li>• Flexible exits</li>
+            </ul>`
+        }
+      };
+
+      $$("[data-program]").forEach(btn => {
+        on(btn, "click", () => {
+          const name = btn.getAttribute("data-program");
+          const info = programDetails[name] || { title: name, body: "<p class='text-gray-300'>Details coming soon.</p>" };
+          openModal({
+            title: info.title,
+            bodyHTML: info.body,
+            footerButtons: [
+              { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+              { label: "Get Pre-Approved", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal({ type: name }); } }
+            ]
+          });
+        });
+      });
+
+      // Application modal
+      const openApplicationModal = (prefill = {}) => {
+        openModal({
+          title: "Get Pre-Approved",
+          bodyHTML: `
+            <p class="text-gray-300 mb-4">Fill this out and we’ll respond with terms fast (demo form).</p>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm text-gray-400">Name</label>
+                <input id="appName" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Your name">
+              </div>
+              <div>
+                <label class="text-sm text-gray-400">Email</label>
+                <input id="appEmail" type="email" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="you@email.com">
+              </div>
+              <div>
+                <label class="text-sm text-gray-400">Loan Type</label>
+                <input id="appType" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Fix & Flip / DSCR / Bridge">
+              </div>
+              <div>
+                <label class="text-sm text-gray-400">Target Close (days)</label>
+                <input id="appClose" type="number" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="2">
+              </div>
+            </div>
+            <div class="mt-4">
+              <label class="text-sm text-gray-400">Property Address</label>
+              <input id="appAddress" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="123 Main St, City, ST">
+            </div>
+            <div class="mt-4">
+              <label class="text-sm text-gray-400">Notes</label>
+              <textarea id="appNotes" rows="4" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Tell us about the deal..."></textarea>
+            </div>
+            <p class="text-xs text-gray-500 mt-3">Demo: connect to Formspree/Calendly/CRM later.</p>
+          `,
           footerButtons: [
             { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
-            { label: "Get Pre-Approved", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal({ type: name }); } }
+            { label: "Submit (Demo)", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { alert("Submitted! (Demo)"); closeModal(); } }
+          ]
+        });
+
+        if (prefill.type) {
+          const t = $("#appType");
+          if (t) t.value = prefill.type;
+        }
+      };
+
+      // Primary buttons
+      on($("#btnPreapprove"), "click", () => openApplicationModal());
+      on($("#btnPreapproveMobile"), "click", () => openApplicationModal());
+      on($("#btnStartApp"), "click", () => openApplicationModal());
+
+      on($("#btnHowItWorks"), "click", () => {
+        openModal({
+          title: "How It Works",
+          bodyHTML: `
+            <ol class="space-y-3 text-gray-300">
+              <li class="flex gap-3"><span class="text-ridge-gold font-bold">1.</span> Submit deal basics (2 minutes).</li>
+              <li class="flex gap-3"><span class="text-ridge-gold font-bold">2.</span> Underwrite + issue terms.</li>
+              <li class="flex gap-3"><span class="text-ridge-gold font-bold">3.</span> Clear conditions & schedule closing.</li>
+              <li class="flex gap-3"><span class="text-ridge-gold font-bold">4.</span> Fund in 24–48 hours when ready.</li>
+            </ol>
+            <div class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
+              <div class="text-sm text-gray-400">Pro tip</div>
+              <div class="font-semibold">Have contract + scope ready to move faster.</div>
+            </div>
+          `,
+          footerButtons: [
+            { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+            { label: "Start Application", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal(); } }
           ]
         });
       });
-    });
 
-    // Application modal
-    function openApplicationModal(prefill = {}) {
-      openModal({
-        title: "Get Pre-Approved",
-        bodyHTML: `
-          <p class="text-gray-300 mb-4">Fill this out and we’ll respond with terms fast (demo form).</p>
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="text-sm text-gray-400">Name</label>
-              <input id="appName" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Your name">
+      // Quote logic
+      const propertyValue = $("#propertyValue");
+      const propertyValueDisplay = $("#propertyValueDisplay");
+      const loanAmount = $("#loanAmount");
+      const loanAmountDisplay = $("#loanAmountDisplay");
+      const estimatedRate = $("#estimatedRate");
+      const monthlyPayment = $("#monthlyPayment");
+
+      const formatCurrency = (value) => {
+        const v = Number(value);
+        if (v >= 1000000) return "$" + (v / 1000000).toFixed(1) + "M";
+        if (v >= 1000) return "$" + (v / 1000).toFixed(0) + "k";
+        return "$" + v.toLocaleString();
+      };
+
+      const calculateLoan = () => {
+        if (!propertyValue || !loanAmount) return;
+        const pv = parseInt(propertyValue.value, 10);
+        const la = parseInt(loanAmount.value, 10);
+        if (!pv || !la) return;
+
+        const ltv = (la / pv) * 100;
+        let rate = 10.99;
+        if (ltv <= 60) rate = 9.99;
+        else if (ltv <= 70) rate = 10.49;
+        else if (ltv <= 80) rate = 10.99;
+        else rate = 11.49;
+
+        if (estimatedRate) estimatedRate.textContent = rate.toFixed(2) + "%";
+        const monthly = (la * (rate / 100)) / 12;
+        if (monthlyPayment) monthlyPayment.textContent = "$" + monthly.toLocaleString("en-US", { maximumFractionDigits: 0 });
+      };
+
+      on(propertyValue, "input", (e) => { if (propertyValueDisplay) propertyValueDisplay.textContent = formatCurrency(e.target.value); calculateLoan(); });
+      on(loanAmount, "input", (e) => { if (loanAmountDisplay) loanAmountDisplay.textContent = formatCurrency(e.target.value); calculateLoan(); });
+
+      on($("#btnFullQuote"), "click", () => {
+        openModal({
+          title: "Your Quote (Demo)",
+          bodyHTML: `
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-sm text-gray-400">Property Value</div>
+                <div class="text-xl font-bold">${formatCurrency(propertyValue?.value || 0)}</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-sm text-gray-400">Loan Amount</div>
+                <div class="text-xl font-bold">${formatCurrency(loanAmount?.value || 0)}</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-sm text-gray-400">Estimated Rate</div>
+                <div class="text-xl font-bold text-ridge-gold">${estimatedRate?.textContent || "—"}</div>
+              </div>
+              <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                <div class="text-sm text-gray-400">Interest-Only Payment</div>
+                <div class="text-xl font-bold">${monthlyPayment?.textContent || "—"}/mo</div>
+              </div>
             </div>
-            <div>
-              <label class="text-sm text-gray-400">Email</label>
-              <input id="appEmail" type="email" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="you@email.com">
-            </div>
-            <div>
-              <label class="text-sm text-gray-400">Loan Type</label>
-              <input id="appType" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Fix & Flip / DSCR / Bridge">
-            </div>
-            <div>
-              <label class="text-sm text-gray-400">Target Close (days)</label>
-              <input id="appClose" type="number" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="2">
-            </div>
-          </div>
-          <div class="mt-4">
-            <label class="text-sm text-gray-400">Property Address</label>
-            <input id="appAddress" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="123 Main St, City, ST">
-          </div>
-          <div class="mt-4">
-            <label class="text-sm text-gray-400">Notes</label>
-            <textarea id="appNotes" rows="4" class="mt-2 w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white outline-none focus:border-ridge-gold" placeholder="Tell us about the deal..."></textarea>
-          </div>
-          <p class="text-xs text-gray-500 mt-3">Demo: connect to Formspree/Calendly/CRM later.</p>
-        `,
-        footerButtons: [
-          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
-          { label: "Submit (Demo)", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { alert("Submitted! (Demo)"); closeModal(); } }
-        ]
+            <p class="text-sm text-gray-400 mt-4">Submit the application for final terms.</p>
+          `,
+          footerButtons: [
+            { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+            { label: "Get Pre-Approved", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal(); } }
+          ]
+        });
       });
-      if (prefill.type) $("#appType").value = prefill.type;
-    }
 
-    // Primary buttons
-    $("#btnPreapprove").addEventListener("click", () => openApplicationModal());
-    $("#btnPreapproveMobile").addEventListener("click", () => openApplicationModal());
-    $("#btnStartApp").addEventListener("click", () => openApplicationModal());
+      // Deal analyzer
+      const calcPurchase = $("#calcPurchase");
+      const calcRehab = $("#calcRehab");
+      const calcARV = $("#calcARV");
+      const calcHold = $("#calcHold");
+      const resultLoan = $("#resultLoan");
+      const resultDown = $("#resultDown");
+      const resultInterest = $("#resultInterest");
+      const resultFees = $("#resultFees");
+      const resultSelling = $("#resultSelling");
+      const resultProfit = $("#resultProfit");
+      const resultROI = $("#resultROI");
 
-    $("#btnHowItWorks").addEventListener("click", () => {
-      openModal({
-        title: "How It Works",
-        bodyHTML: `
-          <ol class="space-y-3 text-gray-300">
-            <li class="flex gap-3"><span class="text-ridge-gold font-bold">1.</span> Submit deal basics (2 minutes).</li>
-            <li class="flex gap-3"><span class="text-ridge-gold font-bold">2.</span> Underwrite + issue terms.</li>
-            <li class="flex gap-3"><span class="text-ridge-gold font-bold">3.</span> Clear conditions & schedule closing.</li>
-            <li class="flex gap-3"><span class="text-ridge-gold font-bold">4.</span> Fund in 24–48 hours when ready.</li>
-          </ol>
-          <div class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10">
-            <div class="text-sm text-gray-400">Pro tip</div>
-            <div class="font-semibold">Have contract + scope ready to move faster.</div>
-          </div>
-        `,
-        footerButtons: [
-          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
-          { label: "Start Application", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal(); } }
-        ]
+      const calculateDeal = () => {
+        const purchase = parseInt(calcPurchase?.value, 10) || 0;
+        const rehab = parseInt(calcRehab?.value, 10) || 0;
+        const arv = parseInt(calcARV?.value, 10) || 0;
+        const hold = parseInt(calcHold?.value, 10) || 0;
+
+        const totalCost = purchase + rehab;
+        const la = totalCost * 0.9;
+        const down = totalCost - la;
+
+        const interestRate = 0.1099;
+        const monthlyInterest = (la * interestRate) / 12;
+        const totalInterest = monthlyInterest * hold;
+
+        const points = la * 0.02;
+        const selling = arv * 0.06;
+
+        const netProfit = arv - la - down - totalInterest - points - selling;
+        const cashInvested = down + totalInterest + points;
+        const roi = cashInvested > 0 ? (netProfit / cashInvested) * 100 : 0;
+
+        if (resultLoan) resultLoan.textContent = "$" + la.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        if (resultDown) resultDown.textContent = "$" + down.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        if (resultInterest) resultInterest.textContent = "$" + totalInterest.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        if (resultFees) resultFees.textContent = "$" + points.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        if (resultSelling) resultSelling.textContent = "$" + selling.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        if (resultProfit) resultProfit.textContent = "$" + netProfit.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        if (resultROI) resultROI.textContent = roi.toFixed(0) + "%";
+
+        if (resultProfit) {
+          if (netProfit < 0) {
+            resultProfit.classList.remove("text-ridge-gold");
+            resultProfit.classList.add("text-red-400");
+          } else {
+            resultProfit.classList.remove("text-red-400");
+            resultProfit.classList.add("text-ridge-gold");
+          }
+        }
+      };
+
+      [calcPurchase, calcRehab, calcARV, calcHold].forEach(i => on(i, "input", calculateDeal));
+
+      on($("#btnEmailResults"), "click", () => {
+        openModal({
+          title: "Email Results (Demo)",
+          bodyHTML: `
+            <p class="text-gray-300 mb-4">Enter your email and we’ll send the deal snapshot (demo).</p>
+            <input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-ridge-gold" placeholder="you@email.com">
+            <div class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300">
+              <div class="flex justify-between"><span>Net Profit</span><span class="font-mono">${resultProfit?.textContent || "—"}</span></div>
+              <div class="flex justify-between mt-1"><span>ROI</span><span class="font-mono">${resultROI?.textContent || "—"}</span></div>
+            </div>
+          `,
+          footerButtons: [
+            { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
+            { label: "Send (Demo)", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { alert("Sent! (Demo)"); closeModal(); } }
+          ]
+        });
+      });
+
+      // Inline lead capture
+      on($("#btnInlineSubmit"), "click", () => {
+        const email = ($("#inlineEmail")?.value || "").trim();
+        if (!email) { alert("Enter an email first."); return; }
+        alert("Submitted! (Demo)");
+        const ie = $("#inlineEmail");
+        if (ie) ie.value = "";
+      });
+
+      // CTA buttons
+      on($("#btnApplyNow"), "click", () => openApplicationModal());
+      on($("#btnScheduleCall"), "click", () => demoNotice("Schedule a Call"));
+
+      // Footer buttons
+      on($("#btnPrivacy"), "click", () => demoNotice("Privacy Policy"));
+      on($("#btnTerms"), "click", () => demoNotice("Terms of Service"));
+      on($("#btnNMLS"), "click", () => demoNotice("NMLS Information"));
+      on($("#btnContact"), "click", () => demoNotice("Contact"));
+      $$("[data-social]").forEach(b => on(b, "click", () => demoNotice(b.getAttribute("data-social"))));
+
+      // FAQ accordion
+      $$(".faq").forEach(card => {
+        on(card, "click", () => {
+          const body = card.querySelector(".faq-body");
+          const all = $$(".faq-body");
+          all.forEach(x => { if (x !== body) x.classList.add("hidden"); });
+          if (body) body.classList.toggle("hidden");
+          safe(() => lucide.createIcons());
+        });
+      });
+
+      // ===== Spice JS pack =====
+
+      // Scroll progress bar
+      safe(() => {
+        const bar = document.getElementById("scrollProgress");
+        const update = () => {
+          const h = document.documentElement;
+          const max = (h.scrollHeight - h.clientHeight) || 1;
+          const pct = (window.scrollY / max) * 100;
+          if (bar) bar.style.width = pct + "%";
+        };
+        update();
+        window.addEventListener("scroll", update, { passive: true });
+      });
+
+      // Mouse spotlight
+      safe(() => {
+        const s = document.getElementById("spotlight");
+        if (!s) return;
+        window.addEventListener("pointermove", (e) => {
+          const x = (e.clientX / window.innerWidth) * 100;
+          const y = (e.clientY / window.innerHeight) * 100;
+          s.style.setProperty("--mx", x + "%");
+          s.style.setProperty("--my", y + "%");
+        }, { passive: true });
+      });
+
+      // Sticky CTA show after scrolling a bit
+      safe(() => {
+        const sticky = document.getElementById("stickyCta");
+        const toggle = () => {
+          if (!sticky) return;
+          if (window.scrollY > 520) sticky.classList.add("show");
+          else sticky.classList.remove("show");
+        };
+        toggle();
+        window.addEventListener("scroll", toggle, { passive: true });
+      });
+
+      // Sticky CTA button
+      on(document.getElementById("btnStickyApply"), "click", () => openApplicationModal());
+
+      // Ripple effect
+      safe(() => {
+        document.addEventListener("click", (e) => {
+          const btn = e.target.closest(".ripple");
+          if (!btn) return;
+
+          const rect = btn.getBoundingClientRect();
+          const ink = document.createElement("span");
+          ink.className = "ripple-ink";
+          const size = Math.max(rect.width, rect.height);
+          ink.style.width = ink.style.height = size + "px";
+          ink.style.left = (e.clientX - rect.left - size / 2) + "px";
+          ink.style.top  = (e.clientY - rect.top - size / 2) + "px";
+          btn.appendChild(ink);
+          setTimeout(() => ink.remove(), 650);
+        });
+      });
+
+      // Init
+      safe(() => {
+        const pvd = $("#propertyValueDisplay");
+        const lad = $("#loanAmountDisplay");
+        if (pvd && propertyValue) pvd.textContent = formatCurrency(propertyValue.value);
+        if (lad && loanAmount) lad.textContent = formatCurrency(loanAmount.value);
+        calculateLoan();
+        calculateDeal();
+        safe(() => lucide.createIcons());
       });
     });
-
-    // Quote logic
-    const propertyValue = $("#propertyValue");
-    const propertyValueDisplay = $("#propertyValueDisplay");
-    const loanAmount = $("#loanAmount");
-    const loanAmountDisplay = $("#loanAmountDisplay");
-    const estimatedRate = $("#estimatedRate");
-    const monthlyPayment = $("#monthlyPayment");
-
-    function formatCurrency(value) {
-      const v = Number(value);
-      if (v >= 1000000) return "$" + (v / 1000000).toFixed(1) + "M";
-      if (v >= 1000) return "$" + (v / 1000).toFixed(0) + "k";
-      return "$" + v.toLocaleString();
-    }
-
-    function calculateLoan() {
-      const pv = parseInt(propertyValue.value, 10);
-      const la = parseInt(loanAmount.value, 10);
-      if (!pv || !la) return;
-
-      const ltv = (la / pv) * 100;
-      let rate = 10.99;
-      if (ltv <= 60) rate = 9.99;
-      else if (ltv <= 70) rate = 10.49;
-      else if (ltv <= 80) rate = 10.99;
-      else rate = 11.49;
-
-      estimatedRate.textContent = rate.toFixed(2) + "%";
-      const monthly = (la * (rate / 100)) / 12;
-      monthlyPayment.textContent = "$" + monthly.toLocaleString("en-US", { maximumFractionDigits: 0 });
-    }
-
-    propertyValue.addEventListener("input", (e) => { propertyValueDisplay.textContent = formatCurrency(e.target.value); calculateLoan(); });
-    loanAmount.addEventListener("input", (e) => { loanAmountDisplay.textContent = formatCurrency(e.target.value); calculateLoan(); });
-
-    $("#btnFullQuote").addEventListener("click", () => {
-      openModal({
-        title: "Your Quote (Demo)",
-        bodyHTML: `
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div class="text-sm text-gray-400">Property Value</div>
-              <div class="text-xl font-bold">${formatCurrency(propertyValue.value)}</div>
-            </div>
-            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div class="text-sm text-gray-400">Loan Amount</div>
-              <div class="text-xl font-bold">${formatCurrency(loanAmount.value)}</div>
-            </div>
-            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div class="text-sm text-gray-400">Estimated Rate</div>
-              <div class="text-xl font-bold text-ridge-gold">${estimatedRate.textContent}</div>
-            </div>
-            <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-              <div class="text-sm text-gray-400">Interest-Only Payment</div>
-              <div class="text-xl font-bold">${monthlyPayment.textContent}/mo</div>
-            </div>
-          </div>
-          <p class="text-sm text-gray-400 mt-4">Submit the application for final terms.</p>
-        `,
-        footerButtons: [
-          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
-          { label: "Get Pre-Approved", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { closeModal(); openApplicationModal(); } }
-        ]
-      });
-    });
-
-    // Deal analyzer
-    const calcPurchase = $("#calcPurchase");
-    const calcRehab = $("#calcRehab");
-    const calcARV = $("#calcARV");
-    const calcHold = $("#calcHold");
-    const resultLoan = $("#resultLoan");
-    const resultDown = $("#resultDown");
-    const resultInterest = $("#resultInterest");
-    const resultFees = $("#resultFees");
-    const resultSelling = $("#resultSelling");
-    const resultProfit = $("#resultProfit");
-    const resultROI = $("#resultROI");
-
-    function calculateDeal() {
-      const purchase = parseInt(calcPurchase.value, 10) || 0;
-      const rehab = parseInt(calcRehab.value, 10) || 0;
-      const arv = parseInt(calcARV.value, 10) || 0;
-      const hold = parseInt(calcHold.value, 10) || 0;
-
-      const totalCost = purchase + rehab;
-      const la = totalCost * 0.9;
-      const down = totalCost - la;
-
-      const interestRate = 0.1099;
-      const monthlyInterest = (la * interestRate) / 12;
-      const totalInterest = monthlyInterest * hold;
-
-      const points = la * 0.02;
-      const selling = arv * 0.06;
-
-      const netProfit = arv - la - down - totalInterest - points - selling;
-      const cashInvested = down + totalInterest + points;
-      const roi = cashInvested > 0 ? (netProfit / cashInvested) * 100 : 0;
-
-      resultLoan.textContent = "$" + la.toLocaleString(undefined, { maximumFractionDigits: 0 });
-      resultDown.textContent = "$" + down.toLocaleString(undefined, { maximumFractionDigits: 0 });
-      resultInterest.textContent = "$" + totalInterest.toLocaleString(undefined, { maximumFractionDigits: 0 });
-      resultFees.textContent = "$" + points.toLocaleString(undefined, { maximumFractionDigits: 0 });
-      resultSelling.textContent = "$" + selling.toLocaleString(undefined, { maximumFractionDigits: 0 });
-      resultProfit.textContent = "$" + netProfit.toLocaleString(undefined, { maximumFractionDigits: 0 });
-      resultROI.textContent = roi.toFixed(0) + "%";
-
-      if (netProfit < 0) {
-        resultProfit.classList.remove("text-ridge-gold");
-        resultProfit.classList.add("text-red-400");
-      } else {
-        resultProfit.classList.remove("text-red-400");
-        resultProfit.classList.add("text-ridge-gold");
-      }
-    }
-    [calcPurchase, calcRehab, calcARV, calcHold].forEach(i => i.addEventListener("input", calculateDeal));
-
-    $("#btnEmailResults").addEventListener("click", () => {
-      openModal({
-        title: "Email Results (Demo)",
-        bodyHTML: `
-          <p class="text-gray-300 mb-4">Enter your email and we’ll send the deal snapshot (demo).</p>
-          <input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-ridge-gold" placeholder="you@email.com">
-          <div class="mt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-sm text-gray-300">
-            <div class="flex justify-between"><span>Net Profit</span><span class="font-mono">${resultProfit.textContent}</span></div>
-            <div class="flex justify-between mt-1"><span>ROI</span><span class="font-mono">${resultROI.textContent}</span></div>
-          </div>
-        `,
-        footerButtons: [
-          { label: "Close", className: "px-6 py-3 rounded-lg border border-white/15 hover:bg-white/5 transition", onClick: closeModal },
-          { label: "Send (Demo)", className: "px-6 py-3 rounded-lg bg-ridge-gold text-ridge-900 font-bold hover:bg-ridge-goldLight transition", onClick: () => { alert("Sent! (Demo)"); closeModal(); } }
-        ]
-      });
-    });
-
-    // Inline lead capture
-    $("#btnInlineSubmit").addEventListener("click", () => {
-      const email = $("#inlineEmail").value.trim();
-      if (!email) { alert("Enter an email first."); return; }
-      alert("Submitted! (Demo)");
-      $("#inlineEmail").value = "";
-    });
-
-    // CTA buttons
-    $("#btnApplyNow")?.addEventListener("click", () => openApplicationModal());
-    $("#btnScheduleCall")?.addEventListener("click", () => demoNotice("Schedule a Call"));
-
-    // Footer buttons
-    $("#btnPrivacy").addEventListener("click", () => demoNotice("Privacy Policy"));
-    $("#btnTerms").addEventListener("click", () => demoNotice("Terms of Service"));
-    $("#btnNMLS").addEventListener("click", () => demoNotice("NMLS Information"));
-    $("#btnContact").addEventListener("click", () => demoNotice("Contact"));
-    $$("[data-social]").forEach(b => b.addEventListener("click", () => demoNotice(b.getAttribute("data-social"))));
-
-    // FAQ accordion
-    $$(".faq").forEach(card => {
-      card.addEventListener("click", () => {
-        const body = card.querySelector(".faq-body");
-        const all = $$(".faq-body");
-        all.forEach(x => { if (x !== body) x.classList.add("hidden"); });
-        body.classList.toggle("hidden");
-        lucide.createIcons();
-      });
-    });
-
-    // Init
-    propertyValueDisplay.textContent = formatCurrency(propertyValue.value);
-    loanAmountDisplay.textContent = formatCurrency(loanAmount.value);
-    calculateLoan();
-    calculateDeal();
   </script>
 </body>
 </html>
